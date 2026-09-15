@@ -47,6 +47,8 @@ body {
   color: var(--text-main);
   line-height: 1.8;
   overflow-x: hidden;
+  overflow-wrap: break-word; /* يمنع خروج الكلمات الطويلة عن الإطار */
+  word-wrap: break-word;
   transition: background-color 0.5s ease;
 }
 
@@ -255,7 +257,14 @@ header p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
 .disclaimer i { font-size: 1.8rem; flex-shrink: 0; animation: pulseGlow 2s infinite; }
 
 /* Modern Tables */
-.table-wrap { overflow-x: auto; margin: 2rem 0; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); }
+.table-wrap { 
+  overflow-x: auto; 
+  margin: 2rem 0; 
+  border-radius: var(--radius-md); 
+  box-shadow: var(--shadow-sm); 
+  border: 1px solid rgba(0,0,0,0.05);
+  -webkit-overflow-scrolling: touch; /* سحب سلس للجداول على الموبايل */
+}
 table { width: 100%; border-collapse: collapse; font-size: 1rem; min-width: 600px; background: white; }
 table th, table td { padding: 16px 20px; text-align: right; border-bottom: 1px solid #f1f5f9; }
 table th { background: var(--mode-light); color: var(--text-main); font-weight: 800; white-space: nowrap; }
@@ -297,11 +306,37 @@ footer {
 }
 footer strong { color: white; }
 
+/* التعديلات الخاصة بالموبايل (الشاشات الصغيرة) */
 @media(max-width: 768px) {
   header { padding: 3rem 1rem; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
   header h1 { font-size: 1.8rem; }
-  .section-card { padding: 1.5rem; }
+  
+  .container { padding: 0 1rem; }
+  
+  .section-card { padding: 1.2rem; border-right-width: 4px; }
   .portal-title h2 { font-size: 1.6rem; }
+  
+  /* إلغاء الـ justify الذي يسبب فراغات بشعة على الموبايل */
+  .section-card p { text-align: right; font-size: 1rem; }
+  
+  .case-card { padding: 1.2rem; margin-top: 1rem; }
+  
+  /* تعديل الجداول على الموبايل */
+  .table-wrap {
+    margin: 1.5rem -1rem; /* لجعل الجدول يأخذ عرض الشاشة بالكامل للتسهيل */
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  table { 
+    min-width: 450px; /* تصغير العرض الأدنى قليلاً */
+  }
+  table th, table td { 
+    padding: 12px 10px; /* تقليل المسافات الداخلية في الجدول */
+    font-size: 0.9rem;
+  }
+  
+  .disclaimer { padding: 1.2rem; font-size: 0.95rem; }
 }
 </style>
 </head>
