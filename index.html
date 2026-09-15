@@ -1,1123 +1,1125 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع تعليمي لمرضى الكلى وممرضي غسيل الكلى</title>
-    <style>
-        :root {
-            --primary: #00897b;
-            --secondary: #4db6ac;
-            --background: #f4f7f6;
-            --text-dark: #263238;
-            --text-light: #546e7a;
-            --white: #ffffff;
-            --danger: #e53935;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 0;
-            line-height: 1.8;
-        }
-        header {
-            background-color: var(--primary);
-            color: var(--white);
-            text-align: center;
-            padding: 2rem 1rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        header h1 { margin: 0; font-size: 1.8rem; }
-        header p { margin-top: 10px; font-size: 1.1rem; opacity: 0.9; }
-        
-        .container {
-            max-width: 1100px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        
-        #selection-screen {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 3rem;
-        }
-        .role-btn {
-            background-color: var(--white);
-            border: 2px solid var(--secondary);
-            border-radius: 15px;
-            padding: 3rem 2rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            cursor: pointer;
-            width: 300px;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .role-btn:hover {
-            background-color: var(--primary);
-            color: var(--white);
-            transform: translateY(-5px);
-        }
-        
-        .content-section {
-            display: none;
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .content-section h2 { color: var(--primary); border-bottom: 2px solid var(--secondary); padding-bottom: 10px; margin-top: 2rem; }
-        .content-section h3 { color: var(--secondary); margin-top: 2rem; font-size: 1.3rem; }
-        .content-section h4 { color: var(--text-dark); margin-top: 1.5rem; }
-        .content-section ul, .content-section ol { padding-right: 20px; color: var(--text-dark); margin-bottom: 1.5rem;}
-        .content-section p { margin-bottom: 1rem; }
-        
-        .back-btn {
-            display: block;
-            margin: 0 auto 2rem auto;
-            padding: 12px 25px;
-            background-color: var(--text-light);
-            color: var(--white);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: 0.3s;
-        }
-        .back-btn:hover { background-color: var(--text-dark); }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.95rem;
-        }
-        table th, table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: right;
-            vertical-align: top;
-        }
-        table th { background-color: var(--secondary); color: var(--white); }
-        table tr:nth-child(even) { background-color: #f9f9f9; }
-        
-        .media-container {
-            text-align: center;
-            margin: 2rem 0;
-        }
-        .media-container img, .media-container video {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بوابة مرضى الكلى وممرضي غسيل الكلى</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* المتغيرات العامة والألوان العصرية */
+:root {
+  --primary-patient: #0d9488;
+  --primary-patient-dark: #0f766e;
+  --light-patient: #ccfbf1;
+  --gradient-patient: linear-gradient(135deg, #14b8a6, #0d9488);
+  
+  --primary-nurse: #2563eb;
+  --primary-nurse-dark: #1d4ed8;
+  --light-nurse: #dbeafe;
+  --gradient-nurse: linear-gradient(135deg, #3b82f6, #2563eb);
 
-        .disclaimer {
-            background-color: #ffebee;
-            color: var(--danger);
-            padding: 1rem;
-            border-radius: 5px;
-            margin-bottom: 2rem;
-            border-right: 4px solid var(--danger);
-            font-weight: bold;
-        }
-    </style>
+  --bg-color: #f8fafc;
+  --surface-color: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --danger-color: #ef4444;
+  --danger-light: #fef2f2;
+  --warning-color: #f59e0b;
+  
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  
+  --mode-color: var(--primary-patient);
+  --mode-light: var(--light-patient);
+  --mode-gradient: var(--gradient-patient);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.8;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease;
+}
+
+body.mode-patient { 
+  --mode-color: var(--primary-patient); 
+  --mode-light: var(--light-patient); 
+  --mode-gradient: var(--gradient-patient);
+  background-image: radial-gradient(circle at top right, rgba(13,148,136,0.05) 0%, transparent 50%);
+}
+body.mode-nurse { 
+  --mode-color: var(--primary-nurse); 
+  --mode-light: var(--light-nurse); 
+  --mode-gradient: var(--gradient-nurse);
+  background-image: radial-gradient(circle at top left, rgba(37,99,235,0.05) 0%, transparent 50%);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(255,255,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header Styling */
+header {
+  background: var(--mode-gradient, linear-gradient(135deg, #0f766e, #1d4ed8));
+  color: white;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  box-shadow: var(--shadow-md);
+  transition: background 0.5s ease;
+}
+header::before {
+  content: '';
+  position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+  animation: float 15s infinite linear;
+  pointer-events: none;
+}
+header .icon-badge {
+  width: 80px; height: 80px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: inline-flex; justify-content: center; align-items: center;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid rgba(255,255,255,0.5);
+  animation: pulseGlow 2s infinite;
+}
+header h1 { font-size: 2.4rem; font-weight: 900; margin-bottom: 1rem; letter-spacing: -0.5px; }
+header p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+
+/* Container */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* Selection Cards */
+#selection-screen {
+  display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+  margin: 5rem auto; padding: 0 1rem;
+}
+.role-card {
+  background: var(--surface-color);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem 2rem;
+  width: 340px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.role-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px;
+  transition: height 0.4s ease; z-index: -1;
+}
+.role-card.patient::after { background: var(--gradient-patient); }
+.role-card.nurse::after { background: var(--gradient-nurse); }
+
+.role-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
+.role-card:hover::after { height: 100%; }
+
+.role-card i { font-size: 3.5rem; margin-bottom: 1.5rem; transition: color 0.4s ease; }
+.role-card.patient i { color: var(--primary-patient); }
+.role-card.nurse i { color: var(--primary-nurse); }
+
+.role-card span { display: block; font-size: 1.6rem; font-weight: 800; color: var(--text-main); transition: color 0.4s ease; }
+.role-card small { display: block; margin-top: 0.8rem; color: var(--text-muted); font-size: 1rem; transition: color 0.4s ease; }
+
+.role-card:hover i, .role-card:hover span, .role-card:hover small { color: white; }
+
+/* Glassmorphism Sticky Nav */
+.quick-nav {
+  display: none;
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding: 15px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+.quick-nav.active { display: block; animation: fadeInUp 0.5s ease; }
+.quick-nav-inner {
+  display: flex; gap: 12px; overflow-x: auto; padding: 0 1.5rem;
+  scrollbar-width: none; /* Firefox */
+  max-width: 1200px; margin: 0 auto;
+}
+.quick-nav-inner::-webkit-scrollbar { display: none; } /* Chrome */
+.quick-nav a {
+  flex: 0 0 auto; white-space: nowrap;
+  background: var(--surface-color); color: var(--text-main);
+  padding: 8px 20px; border-radius: 30px;
+  font-weight: 700; font-size: 0.95rem; text-decoration: none;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+.quick-nav a:hover {
+  background: var(--mode-gradient); color: white;
+  transform: translateY(-2px); box-shadow: var(--shadow-md);
+  border-color: transparent;
+}
+
+/* Action Buttons */
+.back-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin: 2rem 0; padding: 12px 28px;
+  background: var(--surface-color); color: var(--text-main);
+  border: 1px solid rgba(0,0,0,0.1); border-radius: 30px;
+  cursor: pointer; font-size: 1rem; font-weight: 700; font-family: inherit;
+  transition: all 0.3s ease; box-shadow: var(--shadow-sm);
+}
+.back-btn:hover {
+  background: var(--text-main); color: white;
+  transform: translateX(5px);
+}
+
+/* Section Styling */
+.portal-title { text-align: center; margin: 3rem 0 2rem; }
+.portal-title h2 {
+  display: inline-flex; align-items: center; gap: 15px;
+  font-size: 2.2rem; font-weight: 900; color: var(--mode-color);
+  position: relative;
+}
+.portal-title h2::after {
+  content: ''; position: absolute; bottom: -10px; left: 20%; right: 20%;
+  height: 4px; border-radius: 2px; background: var(--mode-gradient);
+}
+.portal-subtitle { text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-muted); font-size: 1.1rem; }
+
+.content-section { display: none; }
+
+.section-card {
+  background: var(--surface-color);
+  padding: 2.5rem; margin-bottom: 2.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border-right: 6px solid var(--mode-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.section-card:hover { box-shadow: var(--shadow-hover); }
+.section-card h3 {
+  color: var(--mode-color); font-size: 1.6rem; font-weight: 800; margin-top: 0;
+  display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem;
+}
+.section-card p { margin-bottom: 1.2rem; text-align: justify; font-size: 1.1rem; }
+.section-card ul, .section-card ol { padding-right: 1.5rem; margin-bottom: 1.5rem; }
+.section-card li { margin-bottom: 10px; font-size: 1.05rem; position: relative; }
+.section-card li::marker { color: var(--mode-color); font-weight: bold; }
+
+/* Alerts / Disclaimers */
+.disclaimer {
+  display: flex; align-items: flex-start; gap: 15px;
+  background: var(--danger-light); color: var(--danger-color);
+  padding: 1.5rem; border-radius: var(--radius-md);
+  margin-bottom: 2.5rem; border-right: 5px solid var(--danger-color);
+  font-weight: 700; font-size: 1.05rem; box-shadow: var(--shadow-sm);
+}
+.disclaimer i { font-size: 1.8rem; flex-shrink: 0; animation: pulseGlow 2s infinite; }
+
+/* Modern Tables */
+.table-wrap { overflow-x: auto; margin: 2rem 0; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid rgba(0,0,0,0.05); }
+table { width: 100%; border-collapse: collapse; font-size: 1rem; min-width: 600px; background: white; }
+table th, table td { padding: 16px 20px; text-align: right; border-bottom: 1px solid #f1f5f9; }
+table th { background: var(--mode-light); color: var(--text-main); font-weight: 800; white-space: nowrap; }
+table tr:last-child td { border-bottom: none; }
+table tr:hover td { background-color: #f8fafc; }
+
+/* Media & Cards inside sections */
+.media-container { text-align: center; margin: 2rem 0; }
+.media-container img, .media-container video {
+  max-width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-md); border: 4px solid white;
+}
+
+.case-card {
+  background: var(--bg-color);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-right: 4px solid var(--mode-color);
+  border-radius: var(--radius-md);
+  padding: 1.8rem; margin-top: 1.5rem;
+  transition: transform 0.3s ease;
+}
+.case-card:hover { transform: translateX(-5px); }
+.case-card h4 { color: var(--text-main); font-size: 1.2rem; margin-bottom: 10px; font-weight: 800; }
+.case-card p { margin-bottom: 0; font-size: 1rem; }
+
+/* Checklist Grid */
+.checklist-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+.checklist-card {
+  background: var(--mode-light); border-radius: var(--radius-md); padding: 1.5rem;
+  border: 1px solid rgba(0,0,0,0.03); transition: transform 0.3s ease;
+}
+.checklist-card:hover { transform: translateY(-5px); }
+.checklist-card h4 { background: white; display: inline-block; padding: 6px 15px; border-radius: 20px; margin-bottom: 15px; color: var(--mode-color); font-size: 1.1rem; }
+.checklist-card ul { margin-bottom: 0; }
+
+/* Footer */
+footer {
+  background: #0f172a; color: #94a3b8; text-align: center; padding: 3rem 1.5rem;
+  margin-top: 4rem; font-size: 1rem; border-top: 4px solid var(--mode-color); transition: border-color 0.5s ease;
+}
+footer strong { color: white; }
+
+@media(max-width: 768px) {
+  header { padding: 3rem 1rem; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
+  header h1 { font-size: 1.8rem; }
+  .section-card { padding: 1.5rem; }
+  .portal-title h2 { font-size: 1.6rem; }
+}
+</style>
 </head>
-<body>
+<body id="body">
 
-    <header>
-        <h1>المحتوى العلمي المقترح لموقع تعليمي لمرضى الكلى وممرضي غسيل الكلى</h1>
-        <p>نسخة محتوى عربية عملية مبنية على إرشادات ومصادر مرجعية</p>
-    </header>
+<header id="main-header">
+  <div class="icon-badge"><i class="fas fa-droplet" id="header-icon"></i></div>
+  <h1 id="header-title">بوابة مرضى الكلى وممرضي غسيل الكلى</h1>
+  <p>مرجعكم الموثوق لفهم رحلة غسيل الكلى، بمحتوى عملي وواضح لكل من المريض وفريق التمريض</p>
+</header>
 
-    <div class="container">
-        
-        <div id="selection-screen">
-            <button class="role-btn" onclick="showSection('patient')">أنا مريض / مريضة</button>
-            <button class="role-btn" onclick="showSection('nurse')">أنا ممرض / ممرضة</button>
-        </div>
+<!-- شريط التنقل السريع لبوابة المرضى -->
+<nav class="quick-nav" id="patient-nav">
+  <div class="quick-nav-inner">
+    <a href="#sec1"><i class="fas fa-file-medical"></i> فهم الحالة</a>
+    <a href="#sec2"><i class="fas fa-tint"></i> جلسة الغسيل</a>
+    <a href="#sec3"><i class="fas fa-weight-scale"></i> الوزن الجاف</a>
+    <a href="#sec4"><i class="fas fa-utensils"></i> الحمية الغذائية</a>
+    <a href="#sec5"><i class="fas fa-hand-holding-medical"></i> الوصول الوعائي</a>
+    <a href="#sec6"><i class="fas fa-syringe"></i> التهاب الكبد B</a>
+    <a href="#sec7"><i class="fas fa-pills"></i> الأدوية</a>
+    <a href="#sec8"><i class="fas fa-triangle-exclamation"></i> الأعراض والخطر</a>
+    <a href="#sec9"><i class="fas fa-plane"></i> الحياة اليومية</a>
+  </div>
+</nav>
 
-        <!-- القسم الأول: بوابة مرضى الكلى وذويهم -->
-        <div id="patient-section" class="content-section">
-            <button class="back-btn" onclick="showSelection()">العودة للصفحة الرئيسية</button>
-            
-            <div class="disclaimer">
-                تنبيه: هذا الملف تعليمي. أي قرار علاجي، وصفة غسيل، تعديل للوزن المستهدف، إعدادات جهاز، دواء، أو إجراء غازي يجب أن يتم وفق وصفة الطبيب، تعليمات الجهاز، سياسة المؤسسة، وتدريب مهني معتمد. تم تجنب تحويل قسم الكانيوليشن والإجراءات الطارئة إلى دليل تنفيذ ذاتي تفصيلي.
-            </div>
+<!-- شريط التنقل السريع لبوابة الممرضين (مختصر ومجمّع) -->
+<nav class="quick-nav" id="nurse-nav">
+  <div class="quick-nav-inner">
+    <a href="#n1"><i class="fas fa-clipboard-check"></i> التقييم والمبادئ</a>
+    <a href="#n4"><i class="fas fa-wave-square"></i> الوصول الوعائي والكانيوليشن</a>
+    <a href="#n7"><i class="fas fa-bell"></i> الإنذارات والمضاعفات</a>
+    <a href="#n9"><i class="fas fa-shield-virus"></i> العدوى والتحاليل</a>
+    <a href="#n15"><i class="fas fa-tablets"></i> الأدوية والتغذية</a>
+    <a href="#n17"><i class="fas fa-file-signature"></i> التوثيق والحالات</a>
+  </div>
+</nav>
 
-            <h2>القسم الأول: بوابة مرضى الكلى وذويهم</h2>
-            <p><strong>فلسفة هذا القسم:</strong> لا نكتفي بتعريفات عامة؛ بل نجيب عن الأسئلة التي يواجهها المريض في حياته اليومية: ماذا يعني الرقم؟ متى أقلق؟ ما الذي يمكنني فعله؟ وما الذي يجب أن أتركه لفريق الغسيل؟</p>
+<div class="container">
+  <div id="selection-screen" class="reveal">
+    <button class="role-card patient" onclick="showSection('patient')">
+      <i class="fas fa-user-injured"></i>
+      <span>أنا مريض / مريضة</span>
+      <small>كل ما تحتاج معرفته عن رحلتك مع غسيل الكلى</small>
+    </button>
+    <button class="role-card nurse" onclick="showSection('nurse')">
+      <i class="fas fa-user-nurse"></i>
+      <span>أنا ممرض / ممرضة</span>
+      <small>المرجع السريري الكامل لوحدة غسيل الكلى</small>
+    </button>
+  </div>
 
-            <h3>1. فهم الحالة والتحاليل الأساسية</h3>
-            <p>مرض الكلى المزمن (CKD) لا يساوي تلقائيًا الفشل الكلوي أو الحاجة إلى الغسيل. التقييم يعتمد على مدة الخلل، معدل الترشيح الكبيبي المقدّر (eGFR)، وجود الزلال أو أذية كلوية أخرى، وسرعة التغير مع الوقت. وفق KDIGO، يُعد CKD موجودًا عندما يستمر خلل في بنية أو وظيفة الكلى أكثر من ثلاثة أشهر وله أثر صحي. [R1]</p>
-            <p><strong>ماذا يعني eGFR للمريض؟</strong></p>
-            <ul>
-                <li>الرقم يقدّر قدرة الكلى على الترشيح، لكنه لا يُفسّر وحده دون العمر والحالة السريرية واتجاه النتائج السابقة.</li>
-                <li>الانخفاض السريع أو المفاجئ يحتاج تقييمًا مختلفًا عن انخفاض ثابت مزمن.</li>
-                <li>في المراحل المبكرة قد تكون الأعراض قليلة أو غير موجودة، لذلك المتابعة بالتحاليل مهمة حتى عندما يشعر المريض بأنه بخير.</li>
-                <li>عند الوصول إلى فشل كلوي متقدم، لا يُتخذ قرار بدء الغسيل من رقم واحد فقط؛ بل من الأعراض، السوائل، الشوارد، التغذية، والقدرة على السيطرة على المضاعفات.</li>
-            </ul>
-            <p><strong>أسئلة ذكية يطرحها المريض على فريقه</strong></p>
-            <ul>
-                <li>هل وظائف الكلى عندي مستقرة أم تتراجع؟</li>
-                <li>هل لدي زلال في البول؟ وما أهميته؟</li>
-                <li>ما الأدوية أو العوامل التي قد تسرّع تدهور الكلى؟</li>
-                <li>متى يجب أن أبدأ التحضير لوصول وعائي أو خيارات علاج بديل للكلية؟</li>
-            </ul>
-
-            <h3>2. جلسة غسيل الكلى: ماذا تعني الأرقام؟</h3>
-            <p>الجلسة ليست مجرد "تنقية للدم"؛ بل وصفة تجمع بين مدة العلاج، تدفق الدم، تدفق سائل الغسيل، نوع المرشح، إزالة السوائل، وتركيب سائل الغسيل. لذلك قد يكون مريضان على الجهاز نفسه لكن بوصفات مختلفة تمامًا. [R2]</p>
-            <table>
-                <tr>
-                    <th>المعلومة</th>
-                    <th>ماذا تعني للمريض؟</th>
-                    <th>متى تستحق سؤال الفريق؟</th>
-                </tr>
-                <tr>
-                    <td>الوزن قبل الجلسة</td>
-                    <td>يُقارن بالوزن المستهدف وبالوزن بعد الجلسة السابقة لتقدير تراكم السوائل.</td>
-                    <td>عند زيادة غير معتادة أو ضيق نفس/تورم.</td>
-                </tr>
-                <tr>
-                    <td>الضغط</td>
-                    <td>يساعد على تقييم تحمل السوائل والجلسة، ولا يُفسر رقم منفرد دون أعراض.</td>
-                    <td>هبوط متكرر، دوخة، إغماء، ألم صدر أو ارتفاع مستمر.</td>
-                </tr>
-                <tr>
-                    <td>Kt/V أو URR</td>
-                    <td>مؤشر لكمية إزالة اليوريا وكفاءة الجلسة؛ لدى كثير من المرضى على غسيل ثلاث مرات أسبوعيًا يُستخدم Kt/V ≥1.2 أو URR ≥65% كمرجع، مع اختلاف الهدف حسب الوصفة.</td>
-                    <td>إذا بقي منخفضًا أو يتراجع رغم حضور كامل الجلسات.</td>
-                </tr>
-                <tr>
-                    <td>وقت الجلسة</td>
-                    <td>جزء أساسي من الجرعة؛ تقصير الجلسة قد يقلل إزالة السموم والسوائل.</td>
-                    <td>إذا كان المريض يطلب إنهاء الجلسات مبكرًا بسبب أعراض متكررة.</td>
-                </tr>
-            </table>
-            <p>لا تُقاس جودة الغسيل برقم Kt/V وحده؛ الأعراض، ضغط الدم، تراكم السوائل، البوتاسيوم، الفوسفور، التغذية، الوصول الوعائي، والالتزام بالوقت كلها جزء من التقييم. [R2,R14]</p>
-
-            <h3>3. الوزن الجاف والسوائل</h3>
-            <div class="media-container">
-                <img src="weight.png" alt="الوزن الجاف وتوازن السوائل">
-            </div>
-            <p><strong>ما هو الوزن الجاف؟</strong><br>الوزن الجاف أو الوزن المستهدف هو تقدير سريري للوزن الذي لا تكون عنده علامات واضحة لزيادة السوائل أو نقصها. ليس معادلة ثابتة، وقد يتغير مع فقدان أو اكتساب الوزن الحقيقي، المرض الحاد، الشهية، الدخول للمستشفى، أو تغير وظيفة القلب وكمية البول. [R3,R4]</p>
-            <table>
-                <tr>
-                    <th>ما يلاحظه المريض</th>
-                    <th>ماذا قد يعني؟</th>
-                    <th>ماذا يفعل؟</th>
-                </tr>
-                <tr>
-                    <td>زيادة وزن سريعة بين الجلسات + تورم/ضيق نفس</td>
-                    <td>غالبًا تراكم سوائل، مع ضرورة استبعاد أسباب أخرى.</td>
-                    <td>إبلاغ وحدة الغسيل وعدم محاولة "تعويض" المشكلة بتغيير العلاج بنفسه.</td>
-                </tr>
-                <tr>
-                    <td>دوخة أو تقلصات قرب نهاية الجلسة بشكل متكرر</td>
-                    <td>قد تكون إزالة السوائل أسرع/أكثر من قدرة الجسم على التعويض، أو أن الوزن المستهدف يحتاج مراجعة، أو توجد أسباب أخرى.</td>
-                    <td>تسجيل وقت ظهور الأعراض وإبلاغ الفريق لمراجعة UF والوزن المستهدف والأدوية.</td>
-                </tr>
-                <tr>
-                    <td>ضغط مرتفع مع زيادة الوزن وضيق النفس</td>
-                    <td>قد ينسجم مع زيادة السوائل لكنه ليس تشخيصًا منفردًا.</td>
-                    <td>التقييم السريري مهم، خاصة إذا ظهرت صعوبة تنفس.</td>
-                </tr>
-                <tr>
-                    <td>انخفاض الوزن الحقيقي بسبب ضعف الشهية</td>
-                    <td>قد يصبح الوزن المستهدف السابق أعلى من الوزن الحقيقي الجديد.</td>
-                    <td>إبلاغ اختصاصي التغذية وفريق الغسيل بدل افتراض أن كل نقص وزن هو "إزالة سوائل".</td>
-                </tr>
-            </table>
-            <p><strong>كيف يقلل المريض العطش؟</strong></p>
-            <ul>
-                <li>تقليل الملح والأطعمة شديدة الملوحة لأن الصوديوم يزيد العطش واحتباس السوائل.</li>
-                <li>توزيع كمية السوائل المسموحة على اليوم بدل شرب كمية كبيرة دفعة واحدة.</li>
-                <li>استخدام أكواب صغيرة وقياس الكمية بدل التقدير العشوائي.</li>
-                <li>العناية بجفاف الفم بوسائل مناسبة يحددها الفريق، مع تجنب المنتجات الغنية بالصوديوم أو السكر إذا كانت غير مناسبة للحالة.</li>
-            </ul>
-            <p>عبارة "كل 1 كغم = تقريبًا 1 لتر" مفيدة لفهم زيادة وزن السوائل، لكنها لا تعني أن كل فرق وزن هو سوائل فقط، ولا تعني أن هذا هو هدف UF تلقائيًا. [R3,R4]</p>
-
-            <h3>4. الحمية الغذائية العملية</h3>
-            <div class="media-container">
-                <img src="diet.png" alt="أمثلة من الطعام المحلي والحمية">
-            </div>
-            <p>الحمية في غسيل الكلى يجب أن تكون فردية. المريض الذي لديه بول متبقٍ أو بوتاسيوم طبيعي مستقر قد تختلف احتياجاته عن مريض عديم البول وذو ارتفاعات متكررة. كما تختلف القيود باختلاف تكرار الغسيل ومدة الجلسات. [R5,R16]</p>
-            <table>
-                <tr>
-                    <th>العنصر</th>
-                    <th>لماذا نهتم به؟</th>
-                    <th>كيف نشرحه للمريض عمليًا؟</th>
-                </tr>
-                <tr>
-                    <td>الصوديوم</td>
-                    <td>يزيد العطش واحتباس السوائل وقد يصعّب ضبط الضغط.</td>
-                    <td>التركيز على تقليل الملح والمنتجات المصنعة والصلصات والمخللات، وقراءة الملصق الغذائي.</td>
-                </tr>
-                <tr>
-                    <td>البوتاسيوم</td>
-                    <td>ارتفاعه الشديد قد يؤثر في كهرباء القلب.</td>
-                    <td>لا نمنع "كل ما فيه بوتاسيوم"؛ نربط النصيحة بالتحليل والحصة والطريقة الغذائية.</td>
-                </tr>
-                <tr>
-                    <td>الفوسفور</td>
-                    <td>قد يتراكم ويرتبط باضطرابات العظام والمعادن والحكة.</td>
-                    <td>الانتباه خصوصًا للمضافات الفوسفاتية في الأغذية المصنعة؛ كلمة PHOS في المكونات علامة مهمة.</td>
-                </tr>
-                <tr>
-                    <td>البروتين</td>
-                    <td>مرضى الغسيل يحتاجون عادةً بروتينًا كافيًا للحفاظ على العضلات والتغذية.</td>
-                    <td>الهدف يحدده اختصاصي التغذية حسب الحالة، وليس حمية منخفضة البروتين تلقائيًا.</td>
-                </tr>
-                <tr>
-                    <td>السوائل</td>
-                    <td>تؤثر في زيادة الوزن والضغط وتحمل UF.</td>
-                    <td>تشمل الماء والقهوة والشاي والشوربة والثلج وما يصبح سائلاً في درجة الغرفة.</td>
-                </tr>
-            </table>
-            <p><strong>أمثلة من الطعام الأردني والعربي</strong></p>
-            <table>
-                <tr>
-                    <th>الطعام</th>
-                    <th>النقطة التي ننتبه لها</th>
-                    <th>رسالة الموقع</th>
-                </tr>
-                <tr>
-                    <td>المنسف/الجميد</td>
-                    <td>الصوديوم والفوسفور وحجم الحصة.</td>
-                    <td>ليس "ممنوعًا" تلقائيًا؛ المشكلة غالبًا في الكمية وتكرار الوجبة وتركيز الجميد.</td>
-                </tr>
-                <tr>
-                    <td>المقلوبة</td>
-                    <td>الحصة ومكونات الخضار والملح.</td>
-                    <td>نعدّل الوصفة والحصة بدل إعطاء قائمة ممنوعات جامدة.</td>
-                </tr>
-                <tr>
-                    <td>الحمص/الفول/العدس</td>
-                    <td>قد تكون مصادر معتبرة للبوتاسيوم والفوسفور.</td>
-                    <td>الحصة مهمة، ويجب ربطها بالتحاليل والتغذية الكلية.</td>
-                </tr>
-                <tr>
-                    <td>التمر والموز والبرتقال</td>
-                    <td>قد تكون غنية بالبوتاسيوم.</td>
-                    <td>نشرح البدائل والحصص بدل الاكتفاء بعبارة "ممنوع".</td>
-                </tr>
-                <tr>
-                    <td>الأجبان واللبن والجميد</td>
-                    <td>قد تحمل صوديومًا وفوسفورًا مرتفعين حسب النوع.</td>
-                    <td>قراءة الملصق وحجم الحصة أهم من اسم الغذاء وحده.</td>
-                </tr>
-                <tr>
-                    <td>المشروبات الغازية الداكنة والأطعمة المصنعة</td>
-                    <td>قد تحتوي إضافات فوسفاتية وصوديومًا.</td>
-                    <td>تعليم المريض قراءة المكونات وخصوصًا PHOS.</td>
-                </tr>
-            </table>
-
-            <h3>5. الوصول الوعائي والعناية اليومية</h3>
-            <div class="media-container">
-                <img src="avf-care.png" alt="العناية بالوصول الوعائي">
-            </div>
-            <p>الناسور (AVF) والوصلة الصناعية (AVG) والقسطرة المركزية (CVC) ليست متساوية في مخاطر العدوى والمشكلات. القسطرة ترتبط بخطر أعلى لعدوى مجرى الدم، لذلك يُفضّل تقليل الاعتماد عليها عندما يكون الوصول الدائم مناسبًا. [R6,R7]</p>
-            <p><strong>قاعدة Look – Listen – Feel للمريض</strong></p>
-            <ul>
-                <li>انظر: احمرار، تورم، جرح، إفرازات، تغير في الجلد أو توسع غير معتاد.</li>
-                <li>اشعر: هل الـthrill المعتاد موجود؟ وهل تغيرت قوته؟</li>
-                <li>استمع/اطلب التقييم: أي تغير واضح أو فقدان للـthrill يحتاج تواصلًا سريعًا مع وحدة الغسيل.</li>
-                <li>عدم السماح بقياس الضغط أو سحب الدم أو إعطاء الحقن في ذراع الناسور/الوصلة إلا إذا كان هناك قرار طبي واضح.</li>
-                <li>تجنب الضغط المستمر أو حمل أشياء ثقيلة مباشرة على الوصول.</li>
-                <li>الحفاظ على النظافة ومراقبة علامات العدوى يوميًا.</li>
-                <li>توقف أو تغير الـthrill، نزيف لا يتوقف، تورم سريع، ألم شديد، احمرار مع حرارة/قشعريرة، أو تغير لون/برودة اليد هي أسباب للتواصل العاجل مع الفريق. [R6,R19]</li>
-            </ul>
-
-            <h3>6. التهاب الكبد B والتطعيم</h3>
-            <p>مرضى الغسيل يحتاجون اهتمامًا خاصًا بالوقاية من التهاب الكبد B لأنهم يتعرضون لإجراءات مرتبطة بالدم بصورة متكررة، والاستجابة المناعية للقاح قد تكون أقل من الأشخاص الأصحاء. جدول اللقاح يعتمد على المنتج المستخدم. [R10,R11]</p>
-            <table>
-                <tr>
-                    <th>اللقاح لدى البالغ على الغسيل</th>
-                    <th>الجدول المرجعي حسب CDC</th>
-                    <th>ملاحظة</th>
-                </tr>
-                <tr>
-                    <td>Engerix-B</td>
-                    <td>0، 1، 2، 6 أشهر</td>
-                    <td>تستخدم جرعة مخصصة/أعلى لمرضى الغسيل حسب المنتج.</td>
-                </tr>
-                <tr>
-                    <td>Recombivax HB Dialysis Formulation</td>
-                    <td>0، 1، 6 أشهر</td>
-                    <td>صيغة الغسيل 40 mcg حسب CDC.</td>
-                </tr>
-            </table>
-            <p>بعد إكمال السلسلة، يُفحص anti-HBs عادة بعد 1–2 شهر لتقييم الاستجابة. لدى مرضى الغسيل المستجيبين يُقيّم anti-HBs سنويًا؛ إذا انخفض إلى أقل من 10 mIU/mL توصي CDC بجرعة داعمة، ولا يلزم عادة اختبار استجابة بعد هذه الجرعة الداعمة. [R11]<br>لا يُكتب جدول لقاح على الموقع على أنه بروتوكول وحيد دون ذكر اسم المنتج، لأن الجدول يختلف بين اللقاحات. كما يجب مطابقة الصفحة مع سياسة وزارة الصحة/المؤسسة المحلية.</p>
-
-            <h3>7. الأدوية التي يكثر سؤال المرضى عنها</h3>
-            <table>
-                <tr>
-                    <th>الفئة</th>
-                    <th>لماذا تستخدم؟</th>
-                    <th>نقطة تعليمية مهمة</th>
-                </tr>
-                <tr>
-                    <td>رابطات الفوسفور</td>
-                    <td>تقليل امتصاص الفوسفور من الطعام.</td>
-                    <td>فعاليتها ترتبط بتناولها بالطريقة والتوقيت الموصوفين مع الوجبات؛ لا تُضاعف الجرعة ذاتيًا.</td>
-                </tr>
-                <tr>
-                    <td>الحديد</td>
-                    <td>علاج أو الوقاية من نقص الحديد ضمن خطة فقر الدم.</td>
-                    <td>يُفسر مع Hb وFerritin وTSAT، وليس رقم ferritin وحده.</td>
-                </tr>
-                <tr>
-                    <td>عوامل تحفيز تكوين الكريات الحمراء ESA</td>
-                    <td>علاج بعض حالات فقر الدم المرتبط بـCKD.</td>
-                    <td>الجرعة والهدف فرديان ويعتمدان على استجابة Hb والمخاطر السريرية. [R15]</td>
-                </tr>
-                <tr>
-                    <td>أدوية الضغط</td>
-                    <td>ضبط الضغط وحماية القلب/الأوعية حسب الحالة.</td>
-                    <td>توقيت الجرعة حول جلسة الغسيل لا يُغيّر إلا بالتنسيق مع الفريق، خصوصًا عند هبوط الضغط المتكرر.</td>
-                </tr>
-                <tr>
-                    <td>فيتامين D/علاجات CKD-MBD</td>
-                    <td>تستخدم في سياق اضطراب الكالسيوم والفوسفور وPTH.</td>
-                    <td>لا تُفهم من PTH وحده؛ تُقرأ النتائج كسلسلة واتجاه. [R16]</td>
-                </tr>
-            </table>
-
-            <h3>8. الأعراض الشائعة وعلامات الخطر</h3>
-            <table>
-                <tr>
-                    <th>العرض</th>
-                    <th>أسباب محتملة أثناء/بعد الغسيل</th>
-                    <th>متى يصبح عاجلًا؟</th>
-                </tr>
-                <tr>
-                    <td>دوخة/هبوط ضغط</td>
-                    <td>إزالة سوائل، أدوية، تناول وجبة، عدوى أو مشكلة قلبية وغيرها.</td>
-                    <td>إغماء، ألم صدر، ضيق نفس، ارتباك أو استمرار الأعراض.</td>
-                </tr>
-                <tr>
-                    <td>تقلصات عضلية</td>
-                    <td>انكماش حجم البلازما، هبوط ضغط، اختلالات شوارد أو وزن مستهدف غير مناسب.</td>
-                    <td>إذا كانت شديدة أو متكررة وتمنع إكمال الجلسة.</td>
-                </tr>
-                <tr>
-                    <td>غثيان/قيء</td>
-                    <td>هبوط ضغط هو سبب شائع، وقد توجد أسباب أخرى مرتبطة بالغسيل أو المريض.</td>
-                    <td>مع ألم صدر، اضطراب وعي، حرارة شديدة أو علامات عصبية.</td>
-                </tr>
-                <tr>
-                    <td>قشعريرة/حمى</td>
-                    <td>عدوى أو تفاعل pyrogenic أو أسباب أخرى.</td>
-                    <td>أي حمى/قشعريرة أثناء الغسيل تحتاج تقييمًا سريعًا.</td>
-                </tr>
-                <tr>
-                    <td>ألم/تورم الوصول</td>
-                    <td>infiltration، عدوى، نزف أو مشكلة تدفق.</td>
-                    <td>تورم سريع، نزيف مستمر، فقدان thrill أو تغير دوران اليد.</td>
-                </tr>
-            </table>
-
-            <h3>9. الحياة اليومية والسفر والنشاط</h3>
-            <ul>
-                <li>السفر ممكن غالبًا لكن يحتاج ترتيب الجلسات مسبقًا وتبادل الوصفة والنتائج مع مركز الاستقبال.</li>
-                <li>العمل والدراسة يمكن الاستمرار بهما مع جدولة الجلسات ومناقشة التعب والأعراض مع الفريق.</li>
-                <li>النشاط البدني يُفصّل حسب الحالة القلبية والقدرة الوظيفية والوصول الوعائي؛ الهدف عادة المحافظة على الحركة لا الإفراط في الجهد.</li>
-                <li>الصيام أو تغييرات كبيرة في الطعام والسوائل يجب مناقشتها مع فريق الكلى لأن المخاطر تختلف حسب كمية البول، الضغط، السكري والأدوية.</li>
-                <li>تغير المزاج، القلق، اضطراب النوم والإرهاق تستحق السؤال عنها وعلاجها؛ جودة الحياة جزء من الرعاية وليست أمرًا ثانويًا.</li>
-            </ul>
-        </div>
-
-        <!-- القسم الثاني: بوابة ممرضي غسيل الكلى -->
-        <div id="nurse-section" class="content-section">
-            <button class="back-btn" onclick="showSelection()">العودة للصفحة الرئيسية</button>
-
-            <div class="disclaimer">
-                تنبيه: هذا الملف تعليمي. أي قرار علاجي، وصفة غسيل، تعديل للوزن المستهدف، إعدادات جهاز، دواء، أو إجراء غازي يجب أن يتم وفق وصفة الطبيب، تعليمات الجهاز، سياسة المؤسسة، وتدريب مهني معتمد. تم تجنب تحويل قسم الكانيوليشن والإجراءات الطارئة إلى دليل تنفيذ ذاتي تفصيلي.
-            </div>
-
-            <h2>القسم الثاني: بوابة ممرضي غسيل الكلى</h2>
-            <p><strong>صيغة كل موضوع:</strong> لماذا يحدث؟ ماذا ألاحظ؟ ماذا أراجع؟ ما التدبير التمريضي العام؟ ما علامة الخطر؟ وما الخطأ الشائع؟ البروتوكول المحلي وتعليمات الجهاز هما المرجع التنفيذي النهائي.</p>
-
-            <h3>10. التقييم قبل وأثناء وبعد الجلسة</h3>
-            <p><strong>قبل الجلسة</strong></p>
-            <ul>
-                <li>تأكيد هوية المريض ووصفة الغسيل المحدثة وأي تغييرات طبية منذ الجلسة السابقة.</li>
-                <li>وزن ما قبل الجلسة ومقارنته بالوزن بعد الجلسة السابقة والوزن المستهدف واتجاه الزيادات بين الجلسات.</li>
-                <li>العلامات الحيوية مع تفسيرها سريريًا، وليس مجرد تسجيل رقم.</li>
-                <li>تقييم السوائل: وذمة، ضيق نفس، orthopnea عند وجودها، تغير الضغط، والأعراض المرتبطة بنقص الحجم.</li>
-                <li>تقييم AVF/AVG/CVC قبل الاستخدام بحثًا عن علامات عدوى أو خلل أو نزيف/تورم.</li>
-                <li>مراجعة أعراض جديدة: ألم صدر، ضيق نفس، حمى، نزيف، سقوط، دخول مستشفى، دواء جديد أو تغير في كمية البول.</li>
-                <li>مراجعة التحاليل ذات الصلة والوصفة: Qb/Qd، مدة الجلسة، dialysate composition، UF، anticoagulation وأي أوامر خاصة.</li>
-            </ul>
-            <p><strong>أثناء الجلسة</strong></p>
-            <ul>
-                <li>مراقبة المريض والوصول الوعائي والدائرة، لا الشاشة فقط.</li>
-                <li>ربط تغير الضغط الشرياني/الوريدي أو TMP مع حالة الدائرة والوصول الوعائي والأعراض.</li>
-                <li>تتبع UF والأعراض والضغط، وملاحظة النمط المتكرر وليس الحدث المنفرد فقط.</li>
-                <li>عدم إعادة ضبط الإنذار مرارًا قبل تفسير السبب المتوقع والتأكد من سلامة المريض والدائرة.</li>
-            </ul>
-            <p><strong>بعد الجلسة</strong></p>
-            <ul>
-                <li>وزن ما بعد الجلسة ومقارنته بالهدف مع تفسير أي فرق أو أعراض.</li>
-                <li>تقييم العلامات الحيوية والاستقرار عند الوقوف حسب سياسة الوحدة وحالة المريض.</li>
-                <li>تقييم hemostasis والوصول الوعائي وعدم وجود نزف مستمر أو تورم جديد.</li>
-                <li>توثيق المضاعفات والتدخلات والاستجابة، وأي نقطة تحتاج تعديلًا في الجلسة القادمة أو مراجعة طبية.</li>
-            </ul>
-
-            <h3>11. مبادئ الغسيل ومؤشرات الجهاز</h3>
-            <table>
-                <tr>
-                    <th>المفهوم</th>
-                    <th>المعنى العملي للممرض</th>
-                </tr>
-                <tr>
-                    <td>Diffusion</td>
-                    <td>حركة المذابات عبر الغشاء بحسب فرق التركيز؛ تتأثر بكفاءة الغشاء، Qb، Qd والوقت.</td>
-                </tr>
-                <tr>
-                    <td>Ultrafiltration</td>
-                    <td>إزالة الماء عبر الغشاء؛ معدل الإزالة والوقت يحددان تحمل المريض للوصفة.</td>
-                </tr>
-                <tr>
-                    <td>Convection</td>
-                    <td>حركة المذابات مع حركة الماء عبر الغشاء، وتبرز أكثر في أنماط علاجية تعتمد convective clearance.</td>
-                </tr>
-                <tr>
-                    <td>Qb</td>
-                    <td>تدفق الدم الفعلي عبر الدائرة؛ انخفاضه قد يقلل الكفاءة وقد يشير إلى access/catheter problem أو قيود أخرى.</td>
-                </tr>
-                <tr>
-                    <td>Qd</td>
-                    <td>تدفق سائل الغسيل؛ جزء من وصفة الكفاءة.</td>
-                </tr>
-                <tr>
-                    <td>TMP</td>
-                    <td>فرق الضغط عبر الغشاء؛ اتجاهه قد يساعد على اكتشاف تغير مقاومة المرشح/الدائرة لكنه يُفسر حسب الجهاز والوصفة.</td>
-                </tr>
-            </table>
-
-            <h3>12. الوزن الجاف والسوائل وUF</h3>
-            <p>أهم خطأ تعليمي هو اعتبار الوزن الجاف رقمًا ثابتًا أو اعتبار فرق الوزن وحده مساويًا تلقائيًا لهدف UF. الوزن المستهدف يُراجع بالعلامات السريرية واتجاه الوزن والأعراض، وUF prescription يجب أن يراعي الوصفة، السوائل المعطاة/المفقودة أثناء الجلسة وقدرة المريض على التحمل. [R3,R4]</p>
-            <p><strong>مؤشرات أن الوزن المستهدف قد يحتاج مراجعة</strong></p>
-            <table>
-                <tr>
-                    <th>الملاحظة المتكررة</th>
-                    <th>ما الذي نفكر فيه؟</th>
-                </tr>
-                <tr>
-                    <td>هبوط ضغط/تقلصات قرب نهاية الجلسة</td>
-                    <td>UF rate/volume، الوزن المستهدف، أدوية الضغط، الطعام أثناء الجلسة، عدوى/قلب/أسباب أخرى.</td>
-                </tr>
-                <tr>
-                    <td>بقاء وذمة/ضيق نفس/ضغط مرتفع رغم الوصول للهدف</td>
-                    <td>قد يكون الهدف أعلى من الوزن الحقيقي المناسب أو توجد أسباب قلبية/رئوية أخرى.</td>
-                </tr>
-                <tr>
-                    <td>زيادة وزن حقيقية بسبب تحسن التغذية</td>
-                    <td>قد يصبح target weight القديم منخفضًا نسبيًا.</td>
-                </tr>
-                <tr>
-                    <td>فقدان وزن غير مقصود/سوء تغذية</td>
-                    <td>قد يصبح target weight القديم مرتفعًا بالنسبة للوزن الحقيقي الجديد.</td>
-                </tr>
-            </table>
-            <p><strong>IDWG</strong><br>زيادة الوزن بين الجلسات (Interdialytic Weight Gain) تُستخدم لفهم كمية السوائل المكتسبة واتجاه السلوك الغذائي/السوائل. الأفضل عرضها كاتجاه عبر عدة جلسات وبالنسبة إلى وزن الجسم، بدل الحكم على جلسة واحدة. [R4,R5]<br>أي حاسبة على الموقع ينبغي أن تكون تعليمية فقط، وتعرض النتيجة على أنها "فرق وزن/مؤشر" لا كأمر مباشر لإعداد UF.</p>
-
-            <h3>13. تقييم AVF/AVG واكتشاف الخلل</h3>
-            <div class="media-container">
-                <video src="flow.mp4" autoplay loop muted playsinline alt="تدفق الدم في الوصلة الوريدية الشريانية"></video>
-            </div>
-            <p>KDOQI تعتبر الفحص السريري للوصول الوعائي قبل كل cannulation ممارسة معقولة، لأن التغيرات السريرية قد تكون أول دليل على stenosis أو thrombosis أو infection أو aneurysm/pseudoaneurysm. [R6]</p>
-            <table>
-                <tr>
-                    <th>الملاحظة</th>
-                    <th>التفسير المحتمل</th>
-                    <th>الخطوة التمريضية العامة</th>
-                </tr>
-                <tr>
-                    <td>ضعف/تغير الـthrill أو bruit</td>
-                    <td>تغير التدفق، stenosis أو thrombosis محتمل.</td>
-                    <td>لا تُعامل كاختلاف بسيط؛ أعد التقييم وقارن بالخط الأساسي وأبلغ حسب مسار الوحدة.</td>
-                </tr>
-                <tr>
-                    <td>نزيف مطوّل بعد نزع الإبرة بشكل متكرر</td>
-                    <td>قد يرتبط بمضاد التخثر أو مشكلة outflow/stenosis أو منطقة cannulation.</td>
-                    <td>راجع anticoagulation ونمط النزف وتاريخ الضغوط واطلب تقييم access عند تكراره.</td>
-                </tr>
-                <tr>
-                    <td>ارتفاع venous pressure تدريجيًا عبر جلسات</td>
-                    <td>قد يشير إلى outflow resistance إضافةً لأسباب الدائرة/الإبرة.</td>
-                    <td>قارن الاتجاهات ونتائج الفحص بدل تفسير الجلسة منفردة.</td>
-                </tr>
-                <tr>
-                    <td>صعوبة cannulation متكررة</td>
-                    <td>تشريح صعب، stenosis، عمق/مسار access أو مهارة cannulator.</td>
-                    <td>التصعيد إلى cannulator خبير/ultrasound وفق سياسة الوحدة بدل تكرار المحاولات.</td>
-                </tr>
-                <tr>
-                    <td>تورم الذراع/أوردة جانبية ظاهرة</td>
-                    <td>احتمال venous outflow obstruction.</td>
-                    <td>تقييم سريري وإحالة حسب المسار المحلي.</td>
-                </tr>
-                <tr>
-                    <td>جلد رقيق/لامع فوق aneurysm أو ألم/زيادة سريعة بالحجم</td>
-                    <td>خطر نزف/rupture أعلى.</td>
-                    <td>تجنب استخدام المنطقة المتضررة وطلب تقييم عاجل.</td>
-                </tr>
-            </table>
-
-            <h3>14. الكانيوليشن: البروتوكول الآمن ومبادئ التقنية</h3>
-            <div class="media-container">
-                <img src="cannulation.png" alt="تقنية الكانيوليشن">
-            </div>
-            <p>الكانيوليشن مهارة سريرية غازية يجب أن يتعلمها الممرض بالتدريب العملي والإشراف وتقييم الكفاءة. KDOQI توصي بالـrope-ladder كالتقنية المفضلة للـAVF، وتوصي بحصر buttonhole في ظروف خاصة بسبب زيادة خطر العدوى، وتجنب buttonhole في PTFE grafts. كما توصي باستخدام cannulators مهرة في الكانيوليشن الأولي وبالتدريب المنظم للممرضين. [R6]</p>
-            <p><strong>بروتوكول قبل الكانيوليشن</strong></p>
-            <ul>
-                <li>تأكد من هوية المريض والوصول الصحيح والوصفة، وراجع أي مشكلات في الجلسة السابقة.</li>
-                <li>افحص الوصول والجلد المحيط: علامات عدوى، ورم دموي، aneurysm/pseudoaneurysm، تغير الـthrill/bruit، مناطق الألم أو الجلد المتضرر.</li>
-                <li>حدد خطة توزيع المواقع وفق rope-ladder وسياسة الوحدة؛ تجنب تكرار الوخز في نقطة واحدة لأن ذلك يساهم في أذية الجدار والـaneurysm.</li>
-                <li>نظافة اليدين، قفازات نظيفة، وتنظيف الجلد ثم تطبيق المطهر الموصى به وتركه يجف وفق تعليمات المنتج وسياسة المنشأة. بعد التطهير لا تلمس الموقع إلا بتقنية معقمة. [R8]</li>
-                <li>إذا كانت خصائص الوصول غير واضحة أو توجد صعوبة متوقعة، اطلب مساعدة cannulator أكثر خبرة أو ultrasound إذا كان متاحًا وبحسب السياسة.</li>
-            </ul>
-            <p><strong>أثناء وبعد الكانيوليشن</strong></p>
-            <ul>
-                <li>الهدف هو دخول آمن مع أقل trauma ممكن، تثبيت الإبرة والخطوط لمنع الشد أو dislodgement، وبقاء موضع الوصول ظاهرًا وقابلًا للمراقبة طوال الجلسة.</li>
-                <li>راقب الألم المفاجئ، التورم، الرطوبة/الحرارة قرب الموقع، تغير الضغط الشرياني أو الوريدي، أو انخفاض Qb الفعلي؛ فقد تشير إلى infiltration أو تغير وضع الإبرة.</li>
-                <li>عند تكرار المشاكل لا تُحوّل repositioning المتكرر إلى عادة؛ أعد تقييم access وخطة المواقع ومهارة cannulation.</li>
-                <li>في decannulation/hemostasis اتبع بروتوكول الوحدة، وقيّم زمن النزف ونمط النزف المتكرر لأنه قد يكون علامة على مشكلة access أو anticoagulation.</li>
-            </ul>
-            <p>تم استبعاد تفاصيل زاوية/عمق الإدخال، اختيار gauge، والمناورات الدقيقة لإعادة تموضع الإبرة من هذا الملف؛ هذه تفاصيل عملية يجب تعلمها في تدريب سريري مباشر معتمد وتعتمد على نوع الوصول وتشريحه وسياسة المؤسسة.</p>
-
-            <h3>15. العناية بالقسطرة الوريدية المركزية CVC</h3>
-            <div class="media-container">
-                <video src="cvc.mp4" autoplay loop muted playsinline alt="العناية بالقسطرة الوريدية المركزية"></video>
-            </div>
-            <p>القسطرة تحمل خطرًا أعلى لعدوى مجرى الدم من AVF/AVG، لذلك aseptic technique وhub disinfection من أهم نقاط السلامة. [R7,R9]</p>
-            <p><strong>عند كل اتصال أو فصل</strong></p>
-            <ul>
-                <li>نظافة اليدين وارتداء القفازات بحسب البروتوكول.</li>
-                <li>الحفاظ على القسطرة مغلقة/clamped عندما يجب أن تكون مغلقة، وتقليل زمن بقاء الـhub مفتوحًا.</li>
-                <li>تطهير كل hub بمطهر مناسب مع friction وإزالة أي بقايا دم، واستخدام مادة منفصلة لكل lumen وترك المطهر يجف. [R9]</li>
-                <li>بعد التطهير يجب ألا يلامس الـhub سطحًا غير معقم.</li>
-                <li>فحص exit site والضماد ووجود احمرار، ألم، إفرازات، نزف أو cuff/external changes.</li>
-            </ul>
-            <p><strong>متى نشك في dysfunction؟</strong><br>صعوبة في سحب/إرجاع الدم، Qb غير محقق، ضغوط غير معتادة، alarms متكررة أو حاجة متكررة لتغيير الوضعية.<br>يجب التمييز بين مشكلة ميكانيكية بسيطة (kink/clamp/position) ومشكلة داخلية مثل thrombus/fibrin sheath أو malposition؛ التدبير يتبع بروتوكول الوحدة ولا يعتمد على تكرار عكس الخطوط كحل دائم.</p>
-
-            <h3>16. إنذارات جهاز الغسيل: السبب المتوقع والتفكير التمريضي</h3>
-            <div class="media-container">
-                <video src="machine.mp4" autoplay loop muted playsinline alt="جهاز الغسيل وإنذاراته"></video>
-            </div>
-            <p>المنطق الفيزيولوجي للدائرة متشابه بين أجهزة الغسيل، لكن أسماء الرسائل وحدودها ووظائف الحماية تختلف حسب الموديل وإصدار البرنامج. لذلك الجدول التالي يشرح الأسباب السريرية المتوقعة، بينما أي إجراء على الجهاز نفسه يجب أن يتبع تعليمات الشركة المصنّعة (IFU) وسياسة الوحدة. [R13]</p>
-            <table>
-                <tr>
-                    <th>الإنذار</th>
-                    <th>ماذا يعني؟</th>
-                    <th>الأسباب المرجحة</th>
-                    <th>ماذا يراجع الممرض؟</th>
-                </tr>
-                <tr>
-                    <td>Arterial pressure أكثر سلبية من المعتاد / Low arterial pressure</td>
-                    <td>مقاومة قبل مضخة الدم أو ضعف سحب الدم من الوصول.</td>
-                    <td>kink/clamp في arterial line، needle position، infiltration، انخفاض تدفق AVF/AVG، catheter dysfunction، Qb أعلى من قدرة access، حركة الذراع.</td>
-                    <td>افحص المريض والوصول والخط من المريض للمضخة، قارن بالbaseline ولا تكتفِ بإعادة ضبط الحدود.</td>
-                </tr>
-                <tr>
-                    <td>Arterial pressure أقل سلبية/أعلى من المتوقع</td>
-                    <td>تغير في الضغط قبل المضخة قد يعكس تغير الاتصال أو flow/monitoring.</td>
-                    <td>انفصال/تسرب محتمل حسب موضع sensor، تغير Qb، مشكلة pressure line/transducer، تغير وضع الإبرة/القسطرة.</td>
-                    <td>تأكد من سلامة التوصيلات والدائرة والوصول وقراءة الضغط مقارنة بالخط الأساسي.</td>
-                </tr>
-                <tr>
-                    <td>Venous pressure مرتفع</td>
-                    <td>مقاومة بعد الـdialyzer في طريق عودة الدم للمريض.</td>
-                    <td>kink/clamp في venous line، clot بالـvenous chamber/dialyzer، needle malposition أو infiltration، outflow stenosis، catheter return problem، Qb مرتفع بالنسبة للوصول.</td>
-                    <td>افحص من الـdialyzer حتى المريض، access site والذراع، واتجاه الضغط عبر الجلسات.</td>
-                </tr>
-                <tr>
-                    <td>Venous pressure منخفض</td>
-                    <td>انخفاض مقاومة خط الرجوع أو فقدان continuity.</td>
-                    <td>loose/disconnected connection، needle dislodgement، تسرب، انخفاض Qb أو مشكلة monitoring line.</td>
-                    <td>افحص المريض وموقع الإبرة والدائرة فورًا؛ لا تعتمد على alarm وحده لاكتشاف needle dislodgement.</td>
-                </tr>
-                <tr>
-                    <td>TMP مرتفع أو يتجه للارتفاع</td>
-                    <td>زيادة فرق الضغط عبر الغشاء/مقاومة المرشح.</td>
-                    <td>clotting/hemoconcentration، تغير UF، مشكلة dialysate flow/pressure أو خصائص dialyzer.</td>
-                    <td>قارن مع venous/arterial pressures وحالة الدائرة وUF؛ اتبع IFU للجهاز.</td>
-                </tr>
-                <tr>
-                    <td>Air detector alarm</td>
-                    <td>وجود هواء أو foam في المسار الوريدي أو خلل متعلق بموضع/مستوى chamber/sensor.</td>
-                    <td>loose connection، انخفاض مستوى venous chamber، خط دواء مفتوح، priming غير كافٍ، leak، catheter/line defect.</td>
-                    <td>تعامل كإنذار أمان؛ افحص الدائرة كاملة ولا تتجاوز detector أو تعطل وظيفة الحماية.</td>
-                </tr>
-                <tr>
-                    <td>Blood leak alarm</td>
-                    <td>اشتباه دم في dialysate أو مشكلة بالـdetector.</td>
-                    <td>dialyzer membrane leak/rupture، detector contamination/technical issue، عوامل قد تعطي إنذارًا كاذبًا حسب الجهاز.</td>
-                    <td>أوقف التفسير التلقائي بأنه "sensor فقط"؛ قيّم dialysate والدائرة واتبع IFU والبروتوكول.</td>
-                </tr>
-                <tr>
-                    <td>Conductivity alarm</td>
-                    <td>تركيز dialysate خارج النطاق المبرمج/الآمن.</td>
-                    <td>concentrate غير صحيح/فارغ، water or mixing problem، connector/supply issue، sensor problem.</td>
-                    <td>تأكد أن الجهاز دخل الحماية/bypass حسب تصميمه، ولا تستمر بالعلاج حتى حل السبب وفق IFU.</td>
-                </tr>
-                <tr>
-                    <td>Temperature alarm</td>
-                    <td>حرارة dialysate خارج النطاق.</td>
-                    <td>heater/sensor/mixing problem أو setting غير صحيح.</td>
-                    <td>لا تتابع العلاج مع dialysate غير آمن؛ اتبع IFU واستدعِ الدعم التقني عند الحاجة.</td>
-                </tr>
-                <tr>
-                    <td>UF alarm / UF goal-time mismatch</td>
-                    <td>النظام لا يستطيع تحقيق معدل/حجم UF كما هو مبرمج أو توجد مشكلة balancing.</td>
-                    <td>وقت متبقٍ غير كافٍ، تغيير UF، interruption، balance system issue.</td>
-                    <td>تحقق من الوصفة والوقت والحالة السريرية، ولا ترفع UF تلقائيًا لتعويض التأخير دون تقييم.</td>
-                </tr>
-                <tr>
-                    <td>Power/system alarm</td>
-                    <td>انقطاع كهرباء أو system fault.</td>
-                    <td>power supply، battery state، internal fault.</td>
-                    <td>حافظ على سلامة المريض والدائرة واتبع خطة الطوارئ وتعليمات الجهاز.</td>
-                </tr>
-            </table>
-            <p>خطأ شائع: توسيع حدود alarm أو ضغط Reset مرات متكررة قبل معرفة السبب. تغيّر الضغط قد يكون أول علامة على مشكلة بالدائرة أو الوصول الوعائي.</p>
-
-            <h3>17. مضاعفات الغسيل: السبب والتعامل التمريضي</h3>
-            <p>المرجع العملي الأساسي لهذا القسم هو BC Renal: Nursing Management of Complications during Hemodialysis، إصدار مارس 2025. [R12] تم تلخيص التدبير على مستوى التقييم والاستجابة العامة، مع ترك الأدوية والجرعات والخطوات الإجرائية التفصيلية لبروتوكول المؤسسة.</p>
-            
-            <h4>17.1 انخفاض الضغط أثناء الغسيل (Intradialytic Hypotension)</h4>
-            <p><strong>الأسباب المحتملة:</strong> UF يتجاوز plasma refilling، زيادة كبيرة بين الجلسات، وزن مستهدف غير مناسب، نزف، sepsis، ضعف vasoconstriction، الطعام أثناء الجلسة، أدوية/أمراض قلبية أو autonomic dysfunction.<br>
-            <strong>العلامات التي نبحث عنها:</strong> هبوط ضغط مع دوخة/ضعف، غثيان أو قيء، yawning، تقلصات، شحوب وتعرق، tachycardia؛ وقد تتطور إلى ألم صدر أو فقد وعي.<br>
-            <strong>التعامل التمريضي العام:</strong> أعد تقييم ABC والحالة السريرية والضغط، وراجع UF الجاري والوزن المستهدف والأدوية والأسباب غير المتعلقة بالسوائل. طبّق بروتوكول الوحدة لخفض/إيقاف UF مؤقتًا والدعم المناسب، وصعّد عند استمرار الأعراض أو وجود ألم صدر/اضطراب وعي/عدم استقرار.<br>
-            <strong>خطأ شائع:</strong> علاج الرقم فقط دون البحث عن سبب متكرر، أو افتراض أن كل hypotension سببه "dry weight منخفض".</p>
-
-            <h4>17.2 التقلصات العضلية</h4>
-            <p><strong>الأسباب المحتملة:</strong> انكماش حجم البلازما، UF كبير بالنسبة للوزن، hypotension، وزن مستهدف غير مناسب، اختلال الصوديوم أو شوارد أخرى، poor plasma refilling.<br>
-            <strong>العلامات التي نبحث عنها:</strong> ألم وتشنج عضلي غالبًا في الساقين وقد يترافق مع hypotension.<br>
-            <strong>التعامل التمريضي العام:</strong> قيّم الضغط وUF والأعراض، عالج أي hypotension حسب البروتوكول، خفف العامل المسبب ضمن الخطة الموصوفة، وسجّل التكرار لمراجعة target weight/UF/dialysate prescription.<br>
-            <strong>خطأ شائع:</strong> الاكتفاء بالتدليك في كل جلسة دون مراجعة سبب التكرار.</p>
-
-            <h4>17.3 الغثيان والقيء</h4>
-            <p><strong>الأسباب المحتملة:</strong> هبوط الضغط من الأسباب الشائعة؛ كذلك disequilibrium، تفاعل dialyzer، hemolysis، infection/pyrogenic reaction أو سبب غير متعلق بالغسيل.<br>
-            <strong>العلامات التي نبحث عنها:</strong> غثيان أو قيء مع/بدون تغير ضغط أو أعراض أخرى.<br>
-            <strong>التعامل التمريضي العام:</strong> ابدأ بقياس الضغط وتقييم الأعراض المصاحبة، حماية المريض من aspiration حسب حالته، وابحث عن علامات hemolysis/anaphylaxis/fever/neurologic change. التدبير الدوائي فقط إذا كان موصوفًا.<br>
-            <strong>خطأ شائع:</strong> إعطاء antiemetic قبل التحقق من وجود hypotension أو سبب خطير.</p>
-
-            <h4>17.4 صداع أو أعراض عصبية جديدة</h4>
-            <p><strong>الأسباب المحتملة:</strong> تغير ضغط، disequilibrium، شوارد، glucose، أسباب عصبية غير مرتبطة بالغسيل.<br>
-            <strong>العلامات التي نبحث عنها:</strong> صداع شديد جديد، ارتباك، تغير رؤية، ضعف بؤري، تشنج.<br>
-            <strong>التعامل التمريضي العام:</strong> قيّم العلامات الحيوية والحالة العصبية والغلوكوز حسب البروتوكول، وأبلغ الطبيب/فعّل مسار الطوارئ عند علامات عصبية بؤرية أو اضطراب وعي.<br>
-            <strong>خطأ شائع:</strong> نسب كل صداع إلى الغسيل دون تقييم عصبي.</p>
-
-            <h4>17.5 Dialysis Disequilibrium Syndrome</h4>
-            <p><strong>الأسباب المحتملة:</strong> تغير أسمولية سريع عند إزالة اليوريا بسرعة، خصوصًا عند بدء الغسيل أو ارتفاع اليوريا الشديد/العودة بعد انقطاع.<br>
-            <strong>العلامات التي نبحث عنها:</strong> غثيان، صداع، restlessness، blurred vision، confusion، twitching أو seizures في الحالات الشديدة.<br>
-            <strong>التعامل التمريضي العام:</strong> تعرّف على المريض عالي الخطورة، راقب الأعراض العصبية، وأبلغ الطبيب فورًا لتعديل/إيقاف العلاج حسب شدة الحالة والوصفة. الوقاية بتعديل الوصفة هي الأساس.<br>
-            <strong>خطأ شائع:</strong> عدم التمييز بين DDS وأسباب عصبية أخرى خطيرة.</p>
-
-            <h4>17.6 Hemolysis</h4>
-            <p><strong>الأسباب المحتملة:</strong> ضغوط عالية/انسداد بالدائرة، catheter/needle malposition، مشكلة ميكانيكية، أو مشكلة dialysate/temperature/contamination بحسب الحالة.<br>
-            <strong>العلامات التي نبحث عنها:</strong> دم داكن/شفاف بشكل غير طبيعي، ألم صدر/ظهر/بطن، dyspnea، hypotension، dysrhythmia أو علامات hyperkalemia.<br>
-            <strong>التعامل التمريضي العام:</strong> اعتبرها طارئة: أوقف العلاج وفق بروتوكول الطوارئ، لا تعِد الدم المشتبه بأنه hemolyzed، راقب ECG/vitals وأبلغ الطبيب فورًا، واعزل الجهاز/الدائرة للتحقيق إذا اشتبه سبب تقني أو dialysate.<br>
-            <strong>خطأ شائع:</strong> إعادة الدم قبل استبعاد hemolysis.</p>
-
-            <h4>17.7 Air in bloodline / Air embolism</h4>
-            <p><strong>الأسباب المحتملة:</strong> loose connections، improper priming، medication line مفتوح، cracked catheter/line، انخفاض مستوى chamber أو malfunction.<br>
-            <strong>العلامات التي نبحث عنها:</strong> هواء مرئي/foam أو air alarm؛ وإذا دخل الهواء للمريض قد تظهر chest pain، dyspnea، cough، cyanosis، neurologic change أو collapse.<br>
-            <strong>التعامل التمريضي العام:</strong> تعامل مع الهواء في الخط فورًا حسب IFU وبروتوكول الوحدة. إذا اشتبه air embolism فهذا emergency: أوقف العلاج، امنع مزيدًا من دخول الهواء، فعّل الاستجابة الطارئة وراقب ABC/SpO2 واتصل بالطبيب/فريق الإنعاش.<br>
-            <strong>خطأ شائع:</strong> تجاوز air detector أو إعادة الدم عند الاشتباه بدخول هواء للمريض.</p>
-
-            <h4>17.8 تفاعل حاد/Anaphylaxis أو dialyzer reaction</h4>
-            <p><strong>الأسباب المحتملة:</strong> دواء، iron، latex، dialyzer/membrane/sterilant أو محفز آخر.<br>
-            <strong>العلامات التي نبحث عنها:</strong> حكة/urticaria، facial swelling، throat tightness، wheeze، dyspnea، hypotension أو collapse؛ وقد تحدث anaphylaxis دون طفح.<br>
-            <strong>التعامل التمريضي العام:</strong> توقف عن العامل المشتبه به، قيّم airway/breathing/circulation وفعّل بروتوكول anaphylaxis والطوارئ فورًا. قرر إعادة/عدم إعادة الدم حسب سبب التفاعل وبروتوكول الوحدة والطبيب.<br>
-            <strong>خطأ شائع:</strong> انتظار ظهور طفح جلدي قبل اعتبار anaphylaxis.</p>
-
-            <h4>17.9 Pyrogenic reaction / Fever during dialysis</h4>
-            <p><strong>الأسباب المحتملة:</strong> endotoxin/contamination في water/dialysate/dialyzer/bloodlines أو دواء ملوث؛ أو bacteremia من access أو مصدر آخر.<br>
-            <strong>العلامات التي نبحث عنها:</strong> إحساس بالبرد ثم chills/fever غالبًا مبكرًا، وقد يترافق hypotension، nausea/vomiting.<br>
-            <strong>التعامل التمريضي العام:</strong> قيّم مصدر عدوى محتمل وvitals وaccess، أبلغ الطبيب، اتبع أوامر cultures والعلاج، وإذا اشتبه pyrogen/endotoxin اتبع بروتوكول إيقاف العلاج والتحقيق وأخذ عينات water/dialysate. راقب إن كان أكثر من مريض متأثرًا.<br>
-            <strong>خطأ شائع:</strong> افتراض أن كل قشعريرة مجرد "برد من الجهاز".</p>
-
-            <h4>17.10 Clotted extracorporeal circuit</h4>
-            <p><strong>الأسباب المحتملة:</strong> anticoagulation غير كافٍ، low blood flow، frequent pump stops، kink/clamp، infiltration، hemoconcentration، Hct مرتفع.<br>
-            <strong>العلامات التي نبحث عنها:</strong> dark streaks/clots في chamber/dialyzer، rising pressures، loss of fibers/clearance أو alarms.<br>
-            <strong>التعامل التمريضي العام:</strong> ابحث عن السبب الميكانيكي أولًا، قيّم امتداد clotting واتبع بروتوكول الوحدة بشأن استمرار/تغيير الدائرة. إذا كانت الدائرة متخثرة بالكامل لا تُرجع الدم بالقوة.<br>
-            <strong>خطأ شائع:</strong> محاولة hand-crank/إرجاع دم من دائرة متخثرة بالكامل.</p>
-
-            <h4>17.11 Needle infiltration / Hematoma</h4>
-            <p><strong>الأسباب المحتملة:</strong> access جديد/هش، needle malposition، حركة الإبرة/المريض أو تثبيت غير كافٍ.<br>
-            <strong>العلامات التي نبحث عنها:</strong> ألم مفاجئ، swelling، warmth/moisture/pressure قرب الموقع، arterial/venous alarms.<br>
-            <strong>التعامل التمريضي العام:</strong> أوقف استخدام الإبرة المتأثرة واطلب المساعدة وفق بروتوكول الوحدة، قيّم التورم والدورة الدموية والنزف، وحدد خطة استمرار العلاج بواسطة ممرض كفؤ/فريق access.<br>
-            <strong>خطأ شائع:</strong> الاستمرار في repositioning المتكرر داخل access متورم.</p>
-
-            <h4>17.12 Needle dislodgement / Vascular access disconnection</h4>
-            <p><strong>الأسباب المحتملة:</strong> تثبيت ضعيف، شد الخطوط، حركة المريض، connections غير آمنة.<br>
-            <strong>العلامات التي نبحث عنها:</strong> نزف، تغير venous pressure، wetness حول الموقع؛ وقد لا يكشف الجهاز كل حالات dislodgement.<br>
-            <strong>التعامل التمريضي العام:</strong> مراقبة الوصول بصريًا طوال الجلسة، تثبيت الخطوط، والاستجابة الفورية للنزف/الانفصال وفق بروتوكول الطوارئ.<br>
-            <strong>خطأ شائع:</strong> تغطية موقع الإبر بحيث لا يمكن رؤيته أو الاعتماد على venous alarm وحده.</p>
-
-            <h4>17.13 نزف مطول بعد إزالة الإبرة</h4>
-            <p><strong>الأسباب المحتملة:</strong> anticoagulation، ضغط غير مناسب، cannulation-site damage، احتمال outflow stenosis عند التكرار.<br>
-            <strong>العلامات التي نبحث عنها:</strong> استمرار النزف أكثر من المعتاد أو زيادة زمن hemostasis مقارنة بخط الأساس.<br>
-            <strong>التعامل التمريضي العام:</strong> حقق hemostasis وفق السياسة، راجع anticoagulation واتجاه زمن النزف، واربط النزف المتكرر بعلامات access dysfunction وأبلغ الفريق.<br>
-            <strong>خطأ شائع:</strong> اعتبار النزف المطول المتكرر طبيعيًا لمريض الغسيل.</p>
-
-            <h4>17.14 Chest pain / Arrhythmia during dialysis</h4>
-            <p><strong>الأسباب المحتملة:</strong> ischemia، hypotension، electrolyte shifts، volume change، air embolism، hemolysis أو سبب قلبي مستقل.<br>
-            <strong>العلامات التي نبحث عنها:</strong> ألم/ضغط صدري، dyspnea، diaphoresis، palpitations، ECG changes أو عدم استقرار.<br>
-            <strong>التعامل التمريضي العام:</strong> تعامل كحالة قلبية محتملة: تقييم ABC/vitals، إيقاف/تعديل العلاج حسب البروتوكول، ECG/oxygen أو إجراءات أخرى حسب المسار الطبي، وتصعيد عاجل.<br>
-            <strong>خطأ شائع:</strong> نسب الألم إلى القلق أو UF دون استبعاد الأسباب الخطرة.</p>
-
-            <h4>17.15 Seizure</h4>
-            <p><strong>الأسباب المحتملة:</strong> DDS، severe electrolyte/glucose disturbance، hypertensive emergency، hypoxia أو سبب عصبي.<br>
-            <strong>العلامات التي نبحث عنها:</strong> حركة تشنجية، تغير وعي، post-ictal state.<br>
-            <strong>التعامل التمريضي العام:</strong> احمِ المريض من الإصابة، قيّم airway/breathing/circulation، اطلب المساعدة الطبية فورًا واتبع seizure/emergency protocol؛ ابحث عن السبب القابل للتصحيح.<br>
-            <strong>خطأ شائع:</strong> وضع أشياء داخل فم المريض أو تأخير طلب المساعدة.</p>
-
-            <h3>18. مكافحة العدوى في وحدة الغسيل</h3>
-            <p>CDC توصي بحزمة تدخلات تشمل surveillance لعدوى مجرى الدم، تدقيق hand hygiene شهريًا، ملاحظة access/catheter care دوريًا، تدريب وتقييم competency كل 6–12 شهرًا وعند التوظيف، تثقيف المرضى، تقليل القساطر، واستخدام ممارسات مطهرة معيارية. [R7]<br><strong>نقاط لا ينبغي أن تكون مجرد شعارات</strong></p>
-            <table>
-                <tr>
-                    <th>المجال</th>
-                    <th>ما الذي يُدقق فعليًا؟</th>
-                </tr>
-                <tr>
-                    <td>Hand hygiene</td>
-                    <td>قبل/بعد contact، قبل aseptic task، بعد glove removal، وتوفر الأدوات.</td>
-                </tr>
-                <tr>
-                    <td>AVF/AVG cannulation</td>
-                    <td>تنظيف الجلد، hand hygiene، clean gloves، antiseptic مناسب ووقت جفاف، no-touch بعد التطهير، اتصال aseptic بالدائرة. [R8]</td>
-                </tr>
-                <tr>
-                    <td>CVC hub</td>
-                    <td>scrub with friction، إزالة بقايا الدم، pad منفصلة لكل lumen، dry time، عدم ملامسة nonsterile surface. [R9]</td>
-                </tr>
-                <tr>
-                    <td>Station disinfection</td>
-                    <td>تنظيف الأسطح/الجهاز بين المرضى بعد إزالة supplies الملوثة وبحسب disinfectant contact time.</td>
-                </tr>
-                <tr>
-                    <td>Medication safety</td>
-                    <td>تحضير الحقن في clean area بعيدًا عن مناطق التلوث والـblood exposure، وعدم مشاركة single-dose vials.</td>
-                </tr>
-            </table>
-
-            <h3>19. Hepatitis B: الفحوصات والتطعيم والمتابعة</h3>
-            <p><strong>التفسير العملي للـTriple Panel</strong></p>
-            <table>
-                <tr>
-                    <th>HBsAg</th>
-                    <th>Total anti-HBc</th>
-                    <th>Anti-HBs</th>
-                    <th>التفسير المحتمل</th>
-                    <th>العمل العام</th>
-                </tr>
-                <tr>
-                    <td>−</td>
-                    <td>−</td>
-                    <td>−</td>
-                    <td>Susceptible إذا لم توجد سلسلة لقاح مكتملة/استجابة موثقة.</td>
-                    <td>التطعيم حسب ACIP وسياسة الوحدة.</td>
-                </tr>
-                <tr>
-                    <td>−</td>
-                    <td>−</td>
-                    <td>+</td>
-                    <td>مناعة بعد التطعيم إذا كانت السلسلة موثقة وanti-HBs مناسب بعد الإكمال.</td>
-                    <td>في مرضى الغسيل: متابعة anti-HBs سنويًا بعد إثبات الاستجابة.</td>
-                </tr>
-                <tr>
-                    <td>−</td>
-                    <td>+</td>
-                    <td>+</td>
-                    <td>عدوى سابقة متعافية ومناعة طبيعية.</td>
-                    <td>توثيق الحالة والنظر في خطر reactivation عند ظروف خاصة.</td>
-                </tr>
-                <tr>
-                    <td>+</td>
-                    <td>+</td>
-                    <td>−</td>
-                    <td>عدوى HBV محتملة/مزمنة إذا IgM سلبي؛ acute إذا IgM إيجابي.</td>
-                    <td>ربط المريض برعاية HBV وتطبيق سياسة وحدة الغسيل.</td>
-                </tr>
-                <tr>
-                    <td>−</td>
-                    <td>+</td>
-                    <td>−</td>
-                    <td>Isolated core antibody؛ له تفسيرات متعددة.</td>
-                    <td>لا تُفسره كمناعة أو susceptibility مباشرة؛ يحتاج تقييم إضافي وفق CDC.</td>
-                </tr>
-            </table>
-            <p><strong>التطعيم والمتابعة في الغسيل</strong></p>
-            <ul>
-                <li>Engerix-B للبالغ على الغسيل: 4 جرعات عند 0، 1، 2، 6 أشهر حسب CDC.</li>
-                <li>Recombivax HB Dialysis Formulation: 3 جرعات عند 0، 1، 6 أشهر.</li>
-                <li>فحص anti-HBs بعد 1–2 شهر من إكمال السلسلة لتوثيق الاستجابة.</li>
-                <li>المستجيب على الغسيل: anti-HBs سنويًا، وإذا أصبح &lt;10 mIU/mL تُعطى booster dose حسب CDC، دون حاجة روتينية لاختبار استجابة بعد booster. [R10,R11]</li>
-                <li>المريض HBsAg-positive يُدار وفق سياسة العدوى المحلية/CDC بما في ذلك إجراءات الفصل/التخصيص المطلوبة في وحدات الغسيل.</li>
-            </ul>
-
-            <h3>20. تفسير التحاليل</h3>
-            <table>
-                <tr>
-                    <th>التحليل</th>
-                    <th>الفكرة الأساسية</th>
-                    <th>أسباب/عوامل محتملة</th>
-                    <th>كيف يفكر الممرض؟</th>
-                </tr>
-                <tr>
-                    <td>Potassium</td>
-                    <td>لماذا يرتفع؟</td>
-                    <td>missed/shortened dialysis، inadequate clearance، dietary load، acidosis، medications، tissue breakdown؛ وتذكر pseudohyperkalemia من عينة hemolyzed.</td>
-                    <td>اربط بالـECG والأعراض وتوقيت العينة والوصفة والوصول الوعائي، وصعّد الارتفاع الشديد/المصحوب بتغيرات قلبية.</td>
-                </tr>
-                <tr>
-                    <td>Sodium</td>
-                    <td>يتأثر بالماء وتوازن الصوديوم والجلوكوز وعوامل أخرى.</td>
-                    <td>لا تفسر hyponatremia/ارتفاع الصوديوم خارج سياق fluid status وserum glucose/dialysate prescription.</td>
-                    <td>راجع الأعراض العصبية واتجاه النتيجة.</td>
-                </tr>
-                <tr>
-                    <td>Calcium + Phosphate + PTH</td>
-                    <td>تقييم CKD-MBD يجب أن يعتمد على القيم معًا واتجاهها وليس رقمًا منفردًا. [R16]</td>
-                    <td>phosphate intake/additives، dialysis removal، binders، vitamin D/calcimimetic therapy، adherence.</td>
-                    <td>راقب الاتجاه والأدوية/الحمية ولا "تعالج PTH" بمعزل عن Ca/P.</td>
-                </tr>
-                <tr>
-                    <td>Hb</td>
-                    <td>جزء من تقييم anemia في CKD. [R15]</td>
-                    <td>نقص الحديد، inflammation، blood loss، inadequate dialysis، ESA response وغيرها.</td>
-                    <td>اربط بالـiron indices والنزف والالتهاب والاتجاه.</td>
-                </tr>
-                <tr>
-                    <td>Ferritin + TSAT</td>
-                    <td>مؤشرات مختلفة لحالة الحديد، وferritin يتأثر بالالتهاب.</td>
-                    <td>لا تستخدم ferritin وحده للحكم على توفر الحديد.</td>
-                    <td>القرارات العلاجية تتبع KDIGO/بروتوكول المؤسسة.</td>
-                </tr>
-                <tr>
-                    <td>Albumin</td>
-                    <td>يرتبط بالتغذية والالتهاب والمرض، وليس اختبار تغذية منفردًا.</td>
-                    <td>قد ينخفض مع inflammation أو poor intake أو protein losses.</td>
-                    <td>انظر للوزن، الشهية، CRP/clinical context والتقييم الغذائي.</td>
-                </tr>
-                <tr>
-                    <td>Bicarbonate</td>
-                    <td>يعكس acid-base status ضمن السياق.</td>
-                    <td>قد ينخفض مع metabolic acidosis أو inadequate buffering.</td>
-                    <td>اربط بالdialysate bicarbonate والوصفة والأعراض.</td>
-                </tr>
-                <tr>
-                    <td>BUN/Creatinine</td>
-                    <td>تعكس تراكم فضلات لكن تتأثر بالتغذية والكتلة العضلية والوقت منذ آخر جلسة.</td>
-                    <td>تستخدم BUN pre/post في adequacy calculations.</td>
-                    <td>لا تستخدم creatinine وحده لقياس كفاءة جلسة الغسيل.</td>
-                </tr>
-            </table>
-
-            <h3>21. كفاءة الغسيل Kt/V وURR</h3>
-            <p>لدى كثير من مرضى الغسيل داخل المركز ثلاث مرات أسبوعيًا، يُستخدم delivered spKt/V لا يقل عادةً عن 1.2 وURR لا يقل عن 65% كمؤشرات شائعة، مع target prescribed spKt/V يقارب 1.4 في KDOQI 2015 لضمان الجرعة المقدمة. الأهداف قد تختلف حسب residual kidney function والوصفة. [R2,R14]</p>
-            <p><strong>إذا كان Kt/V منخفضًا: لا تبدأ بالرقم، ابدأ بالأسباب</strong></p>
-            <ul>
-                <li>هل أُكملت مدة الجلسة الموصوفة؟ هل توجد missed/shortened sessions؟</li>
-                <li>هل Qb الفعلي يحقق الوصفة أم توجد alarms/access dysfunction/catheter recirculation؟</li>
-                <li>هل dialyzer مناسب وهل clotting يقلل surface area الفعالة؟</li>
-                <li>هل أخذت عينات pre/post BUN بالطريقة والتوقيت الصحيحين؟</li>
-                <li>هل هناك recirculation في access أو needle placement issue؟</li>
-                <li>هل زيادة الوزن وUF الكبيرة تؤثر في تفسير URR؟ [R14]</li>
-            </ul>
-
-            <h3>22. فقر الدم في CKD والغسيل</h3>
-            <p>KDIGO أصدرت تحديث 2026 لإرشادات فقر الدم في CKD، وتشمل مرضى الغسيل. دور الممرض هو مراقبة الاتجاهات، إعطاء العلاج الموصوف بأمان، اكتشاف النزف/عدم الاستجابة، وربط Hb بحالة الحديد والالتهاب والتغذية والغسيل. [R15]</p>
-            <ul>
-                <li>Hb منخفض لا يعني تلقائيًا "أعطِ ESA أكثر"؛ يجب التفكير في iron deficiency، inflammation/infection، blood loss، hemolysis، nutritional deficiencies أو أسباب أخرى.</li>
-                <li>Ferritin قد يكون مرتفعًا مع الالتهاب، لذلك يُقرأ مع TSAT والسياق السريري.</li>
-                <li>مراقبة الوصول الوعائي والنزف المتكرر والدائرة المتخثرة مهمة لأنها قد تزيد فقد الدم.</li>
-                <li>التوثيق الدقيق لجرعات iron/ESA والاستجابة يمنع التكرار أو الأخطاء.</li>
-            </ul>
-
-            <h3>23. اضطراب المعادن والعظام CKD-MBD</h3>
-            <p>في مرضى CKD G5D، تقييم phosphate/calcium/PTH يعتمد على الاتجاهات المتسلسلة والعلاقة بينها. KDIGO توصي بخفض الفوسفور المرتفع نحو الطبيعي، مراعاة مصدر الفوسفور، وتجنب الاستخدام الطويل لمركبات الألومنيوم. [R16]</p>
-            <ul>
-                <li>الارتفاع المستمر للفوسفور: راجع الحمية ومضافات phosphate، توقيت/التزام binders، adequacy والمدة/التكرار.</li>
-                <li>PTH غير الطبيعي يُفسر مع calcium/phosphate وvitamin D وعلاج calcimimetic/active vitamin D حسب الوصفة.</li>
-                <li>التثقيف الغذائي يجب أن يميز بين phosphorus additives شديدة الامتصاص وبين المصادر الطبيعية، وليس مجرد قائمة ممنوعات.</li>
-            </ul>
-
-            <h3>24. الأدوية ومضاد التخثر</h3>
-            <p><strong>Anticoagulation</strong><br>الهدف منع clotting للدائرة مع تقليل خطر النزف. النظام والجرعة يحددهما الطبيب/البروتوكول؛ الممرض يراقب circuit clotting، bleeding، وقت hemostasis، الإجراءات الحديثة، thrombocytopenia أو تغير الأدوية المضادة للتخثر.</p>
-            <table>
-                <tr>
-                    <th>المشكلة</th>
-                    <th>ما الذي تراجعه؟</th>
-                </tr>
-                <tr>
-                    <td>Clotting متكرر للدائرة</td>
-                    <td>Qb، pump interruptions، access flow، hemoconcentration/UF، وصفة anticoagulation، Hct، وجود kink/infiltration.</td>
-                </tr>
-                <tr>
-                    <td>نزف مطول</td>
-                    <td>وصفة anticoagulation، أدوية systemic anticoagulants/antiplatelets، cannulation sites، access stenosis signs، platelet issues.</td>
-                </tr>
-                <tr>
-                    <td>Heparin-free dialysis</td>
-                    <td>يحتاج بروتوكول خاص ومراقبة circuit أكثر كثافة؛ لا يُطبّق كحل عشوائي بسبب نزف دون أمر واضح.</td>
-                </tr>
-            </table>
-            <p><strong>أدوية شائعة يحتاج الممرض فهمها</strong></p>
-            <ul>
-                <li>IV iron وESA: ربطها بخطة anemia ومراقبة التفاعلات/الاستجابة.</li>
-                <li>Phosphate binders: فعاليتها مرتبطة بالطعام؛ التثقيف بالتوقيت جزء من العلاج.</li>
-                <li>Antihypertensives: راجع توقيتها عند IDH المتكرر بالتنسيق مع الطبيب، لا توقفها تلقائيًا.</li>
-                <li>Vitamin D/calcimimetic therapies: تربط بـCa/P/PTH trends.</li>
-                <li>الأدوية القابلة للإزالة بالغسيل: توقيت الجرعة يعتمد على dialyzability والوصفة ويُراجع مع الصيدلي/مرجع الدواء.</li>
-            </ul>
-
-            <h3>25. التغذية للممرضين</h3>
-            <p>التثقيف الغذائي الجيد يبدأ من مشكلة محددة لا من قائمة "ممنوعات". مثال: مريض K مرتفع متكرر ➔ راجع adequacy، missed sessions، الأدوية، constipation/acid-base، ثم dietary sources والحصص. مريض phosphate مرتفع ➔ راجع additives، binders مع الوجبة، adequacy، والحصة. [R5,R16]</p>
-            <table>
-                <tr>
-                    <th>المشكلة</th>
-                    <th>أسئلة تمريضية مفيدة</th>
-                </tr>
-                <tr>
-                    <td>زيادة سوائل متكررة</td>
-                    <td>كمية البول؟ الصوديوم؟ أين تأتي السوائل المخفية؟ هل توجد صعوبة في العطش؟ هل target weight محدث؟</td>
-                </tr>
-                <tr>
-                    <td>Potassium مرتفع</td>
-                    <td>جلسات كاملة؟ access functioning؟ hemolyzed sample؟ أدوية؟ إمساك/acid-base؟ مصادر غذائية كبيرة؟</td>
-                </tr>
-                <tr>
-                    <td>Phosphate مرتفع</td>
-                    <td>binders مع الوجبات؟ processed foods/PHOS additives؟ adherence؟ dialysis time/adequacy؟</td>
-                </tr>
-                <tr>
-                    <td>Albumin منخفض/فقد وزن</td>
-                    <td>شهية، nausea، depression، inflammation/infection، protein/energy intake، social barriers.</td>
-                </tr>
-            </table>
-
-            <h3>26. التوثيق وسلامة المريض</h3>
-            <ul>
-                <li>وثّق baseline قبل الجلسة، وليس فقط أرقامًا؛ أي abnormal finding يحتاج خطة أو escalation.</li>
-                <li>وثق access assessment قبل الاستخدام، المشاكل أثناء cannulation، pressures غير المعتادة والتدخلات.</li>
-                <li>في complication: الوقت، الأعراض، vitals، machine parameters ذات الصلة، الإجراء، الشخص الذي تم إبلاغه، والاستجابة.</li>
-                <li>لا تعتمد على copy-forward أو عبارات عامة مثل "patient tolerated well" إذا حدث hypotension أو alarms متكررة.</li>
-                <li>تأكد من medication reconciliation وpatient identification وallergy status قبل إعطاء أي دواء.</li>
-                <li>أي تغيير في prescription يجب أن يكون موثق المصدر (physician/NP/order) وفق السياسة.</li>
-            </ul>
-
-            <h3>27. قوائم تحقق قابلة للتحويل إلى صفحات تفاعلية</h3>
-            <p><strong>Checklist: قبل الجلسة</strong></p>
-            <ul>
-                <li>هوية المريض والوصفة الحالية</li>
-                <li>الوزن والـtarget weight واتجاه IDWG</li>
-                <li>vitals والأعراض</li>
-                <li>fluid assessment</li>
-                <li>access assessment</li>
-                <li>تحاليل/أدوية/أحداث جديدة</li>
-                <li>orders الخاصة بالجلسة</li>
-            </ul>
-            <p><strong>Checklist: AVF/AVG cannulation safety</strong></p>
-            <ul>
-                <li>فحص access والجلد</li>
-                <li>خطة site rotation</li>
-                <li>hand hygiene + gloves</li>
-                <li>skin cleansing/antisepsis + dry time</li>
-                <li>no-touch بعد التطهير</li>
-                <li>aseptic connection</li>
-                <li>secure needles/lines</li>
-                <li>visual monitoring طوال الجلسة</li>
-                <li>توثيق أي صعوبة أو infiltration</li>
-            </ul>
-            <p><strong>Checklist: CVC</strong></p>
-            <ul>
-                <li>exit-site assessment</li>
-                <li>hand hygiene/PPE</li>
-                <li>clamps and connections safe</li>
-                <li>hub disinfection with friction</li>
-                <li>separate antiseptic per lumen</li>
-                <li>dry time/no-touch</li>
-                <li>aseptic connection/disconnection</li>
-                <li>dressing clean/dry/intact</li>
-            </ul>
-            <p><strong>Checklist: بعد الجلسة</strong></p>
-            <ul>
-                <li>post-weight and vitals</li>
-                <li>symptoms resolved/stable</li>
-                <li>hemostasis/access status</li>
-                <li>medications completed</li>
-                <li>complications documented</li>
-                <li>follow-up/escalation arranged</li>
-                <li>patient teaching point if needed</li>
-            </ul>
-
-            <h3>28. حالات سريرية للتعليم</h3>
-            <p><strong>حالة 1: Venous pressure يرتفع تدريجيًا</strong><br>السيناريو: مريض stable، Qb ثابت، والـvenous pressure أصبح أعلى خلال عدة جلسات.<br>نقطة التعلم: ما الذي يجب أن تقارنه؟ هل هناك kink/needle issue؟ هل توجد علامات outflow stenosis؟ هل زمن النزف بعد الجلسة أطول؟ الهدف هو ربط اتجاه الضغط بالـaccess وليس التعامل معه كإنذار جهاز فقط.</p>
-            <p><strong>حالة 2: Hypotension آخر ساعة</strong><br>السيناريو: المريض يصل بزيادة وزن كبيرة، يبدأ الضغط جيدًا ثم يصبح symptomatic في آخر ساعة.<br>نقطة التعلم: راجع UF rate/volume، plasma refill clues، target weight، food/medications، cardiac status. لا تجعل saline هو نهاية التفكير؛ ابحث عن سبب التكرار.</p>
-            <p><strong>حالة 3: Kt/V منخفض</strong><br>السيناريو: الوقت الموصوف 4 ساعات لكن المريض ينهي مبكرًا، وهناك alarms arterial متكررة.<br>نقطة التعلم: قبل تغيير dialyzer، اسأل: هل الزمن مكتمل؟ هل Qb فعلي؟ هل access functioning؟ هل العينات صحيحة؟</p>
-            <p><strong>حالة 4: anti-HBs = 7 mIU/mL لمريض غسيل كان مستجيبًا سابقًا</strong><br>السيناريو: المريض أكمل السلسلة وكان لديه استجابة موثقة.<br>نقطة التعلم: حسب CDC لمريض الغسيل المستجيب، يتم فحص anti-HBs سنويًا وإعطاء booster عندما ينخفض &lt;10 mIU/mL. [R11]</p>
-            <p><strong>حالة 5: ألم وتورم مفاجئ حول إبرة AVF</strong><br>السيناريو: ظهر alarm وتورم بالموقع.<br>نقطة التعلم: فكر infiltration. أوقف استخدام الإبرة المتأثرة واتبع بروتوكول الوحدة، قيّم النزف/الدورة الدموية، واطلب مساعدة cannulator خبير بدل repositioning المتكرر.</p>
-
-            <hr>
-            <h3>المراجع</h3>
-            <ul style="font-size: 0.9rem;">
-                <li>R1. KDIGO. 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease.</li>
-                <li>R2. National Kidney Foundation. Hemodialysis: How It Works, Types, and What to Expect. Updated 2026.</li>
-                <li>R3. National Kidney Foundation. What Is Dry Weight? Updated 2026.</li>
-                <li>R4. National Kidney Foundation. Ultrafiltration.</li>
-                <li>R5. KDOQI Clinical Practice Guideline for Nutrition in CKD: 2020 Update; National Kidney Foundation Nutrition in CKD resources.</li>
-                <li>R6. Lok CE, et al. KDOQI Clinical Practice Guideline for Vascular Access: 2019 Update. Am J Kidney Dis. 2020;75(4 Suppl 2):S1-S164.</li>
-                <li>R7. CDC. Best Practices for Bloodstream Infection Prevention in Dialysis Settings.</li>
-                <li>R8. CDC. Arteriovenous Fistula & Graft Cannulation/Decannulation Checklists and Audit Tools.</li>
-                <li>R9. CDC. Hemodialysis Central Venous Catheter Scrub-the-Hub Protocol.</li>
-                <li>R10. CDC. Adult Immunization Schedule Notes: Hepatitis B - Special Situations (Patients on Dialysis).</li>
-                <li>R11. Schillie S, et al. Prevention of Hepatitis B Virus Infection in the United States: Recommendations of ACIP. MMWR Recomm Rep. 2018;67(1):1-31; CDC hepatitis B testing guidance.</li>
-                <li>R12. BC Renal. Nursing Management of Complications during Hemodialysis. Updated March 2025.</li>
-                <li>R13. Fresenius Medical Care. 4008S Hemodialysis System - Instructions for Use (machine-specific alarm behavior and safety functions).</li>
-                <li>R14. KDOQI Clinical Practice Guideline for Hemodialysis Adequacy: 2015 Update; NKF adequacy resources.</li>
-                <li>R15. KDIGO. 2026 Clinical Practice Guideline for Anemia in Chronic Kidney Disease.</li>
-                <li>R16. KDIGO. 2017 Clinical Practice Guideline Update for CKD-Mineral and Bone Disorder (CKD-MBD).</li>
-                <li>R17. CDC. Clinical Testing and Diagnosis for Hepatitis B - Triple Panel and Interpretation.</li>
-                <li>R18. BC Renal. Vascular Access Resources: Cannulation, access monitoring, infection and disconnection prevention.</li>
-                <li>R19. CDC. Staff Keys to Success - Fistulas and Grafts: Look, Listen, Feel and Patient Education. 2026.</li>
-                <li>R20. National Kidney Foundation. Hemodialysis and Your Diet.</li>
-            </ul>
-            
-            <p style="font-size: 0.9rem; font-weight: bold;">ملاحظة للمراجعة قبل النشر: يجب مطابقة الأقسام التي تحتوي على إجراءات أو سياسات تشغيلية (الكانيوليشن، القسطرة، مضاعفات الجلسة، إعدادات الجهاز، العزل، الأدوية) مع بروتوكول المؤسسة المحلية وتعليمات الجهاز المتوفر لديها؛ الإرشادات الدولية لا تلغي السياسات المعتمدة محليًا.</p>
-        </div>
+  <!-- ================= بوابة المرضى ================= -->
+  <div id="patient-section" class="content-section">
+    <button class="back-btn" onclick="showSelection()"><i class="fas fa-arrow-right"></i> العودة للاختيار</button>
+    
+    <div class="disclaimer reveal">
+      <i class="fas fa-triangle-exclamation"></i>
+      <div><strong>تنبيه:</strong> أي قرار علاجي، وصفة غسيل، تعديل للوزن المستهدف، إعدادات جهاز، دواء، أو إجراء غازي يجب أن يتم وفق وصفة الطبيب، تعليمات الجهاز، سياسة المؤسسة، وتدريب مهني معتمد.</div>
     </div>
 
-    <script>
-        function showSection(role) {
-            document.getElementById('selection-screen').style.display = 'none';
-            document.getElementById('patient-section').style.display = 'none';
-            document.getElementById('nurse-section').style.display = 'none';
-            
-            if (role === 'patient') {
-                document.getElementById('patient-section').style.display = 'block';
-            } else if (role === 'nurse') {
-                document.getElementById('nurse-section').style.display = 'block';
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    <div class="portal-title reveal">
+      <h2><i class="fas fa-user-injured"></i> بوابة مرضى الكلى وذويهم</h2>
+    </div>
+    <p class="portal-subtitle reveal">لا نكتفي بتعريفات عامة؛ بل نجيب عن الأسئلة التي يواجهها المريض في حياته اليومية: ماذا يعني الرقم؟ متى أقلق؟ ما الذي يمكنني فعله؟ وما الذي يجب أن أتركه لفريق الغسيل؟</p>
 
-        function showSelection() {
-            document.getElementById('patient-section').style.display = 'none';
-            document.getElementById('nurse-section').style.display = 'none';
-            document.getElementById('selection-screen').style.display = 'flex';
-        }
-    </script>
+    <!-- الأقسام من 1 إلى 9 (المحتوى كما هو تماماً) -->
+    <div id="sec1" class="section-card reveal">
+      <h3><i class="fas fa-file-medical"></i> 1. فهم الحالة والتحاليل الأساسية</h3>
+      <p>مرض الكلى المزمن (CKD) لا يساوي تلقائيًا الفشل الكلوي أو الحاجة إلى الغسيل. التقييم يعتمد على مدة الخلل، معدل الترشيح الكبيبي المقدّر (eGFR)، وجود الزلال أو أذية كلوية أخرى، وسرعة التغير مع الوقت. وفق KDIGO، يُعد CKD موجودًا عندما يستمر خلل في بنية أو وظيفة الكلى أكثر من ثلاثة أشهر وله أثر صحي. [R1]</p>
+      <p><strong>ماذا يعني eGFR للمريض؟</strong></p>
+      <ul>
+        <li>الرقم يقدّر قدرة الكلى على الترشيح، لكنه لا يُفسّر وحده دون العمر والحالة السريرية واتجاه النتائج السابقة.</li>
+        <li>الانخفاض السريع أو المفاجئ يحتاج تقييمًا مختلفًا عن انخفاض ثابت مزمن.</li>
+        <li>في المراحل المبكرة قد تكون الأعراض قليلة أو غير موجودة، لذلك المتابعة بالتحاليل مهمة حتى عندما يشعر المريض بأنه بخير.</li>
+        <li>عند الوصول إلى فشل كلوي متقدم، لا يُتخذ قرار بدء الغسيل من رقم واحد فقط؛ بل من الأعراض، السوائل، الشوارد، التغذية، والقدرة على السيطرة على المضاعفات.</li>
+      </ul>
+      <p><strong>أسئلة ذكية يطرحها المريض على فريقه</strong></p>
+      <ul>
+        <li>هل وظائف الكلى عندي مستقرة أم تتراجع؟</li>
+        <li>هل لدي زلال في البول؟ وما أهميته؟</li>
+        <li>ما الأدوية أو العوامل التي قد تسرّع تدهور الكلى؟</li>
+        <li>متى يجب أن أبدأ التحضير لوصول وعائي أو خيارات علاج بديل للكلية؟</li>
+      </ul>
+    </div>
+
+    <div id="sec2" class="section-card reveal">
+      <h3><i class="fas fa-tint"></i> 2. جلسة غسيل الكلى: ماذا تعني الأرقام؟</h3>
+      <p>الجلسة ليست مجرد "تنقية للدم"؛ بل وصفة تجمع بين مدة العلاج، تدفق الدم، تدفق سائل الغسيل، نوع المرشح، إزالة السوائل، وتركيب سائل الغسيل. لذلك قد يكون مريضان على الجهاز نفسه لكن بوصفات مختلفة تمامًا. [R2]</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>المعلومة</th><th>ماذا تعني للمريض؟</th><th>متى تستحق سؤال الفريق؟</th></tr>
+          <tr><td>الوزن قبل الجلسة</td><td>يُقارن بالوزن المستهدف وبالوزن بعد الجلسة السابقة لتقدير تراكم السوائل.</td><td>عند زيادة غير معتادة أو ضيق نفس/تورم.</td></tr>
+          <tr><td>الضغط</td><td>يساعد على تقييم تحمل السوائل والجلسة، ولا يُفسر رقم منفرد دون أعراض.</td><td>هبوط متكرر، دوخة، إغماء، ألم صدر أو ارتفاع مستمر.</td></tr>
+          <tr><td>Kt/V أو URR</td><td>مؤشر لكمية إزالة اليوريا وكفاءة الجلسة؛ لدى كثير من المرضى على غسيل ثلاث مرات أسبوعيًا يُستخدم Kt/V ≥1.2 أو URR ≥65% كمرجع، مع اختلاف الهدف حسب الوصفة.</td><td>إذا بقي منخفضًا أو يتراجع رغم حضور كامل الجلسات.</td></tr>
+          <tr><td>وقت الجلسة</td><td>جزء أساسي من الجرعة؛ تقصير الجلسة قد يقلل إزالة السموم والسوائل.</td><td>إذا كان المريض يطلب إنهاء الجلسات مبكرًا بسبب أعراض متكررة.</td></tr>
+        </table>
+      </div>
+      <p>لا تُقاس جودة الغسيل برقم Kt/V وحده؛ الأعراض، ضغط الدم، تراكم السوائل، البوتاسيوم، الفوسفور، التغذية، الوصول الوعائي، والالتزام بالوقت كلها جزء من التقييم. [R2,R14]</p>
+    </div>
+
+    <div id="sec3" class="section-card reveal">
+      <h3><i class="fas fa-weight-scale"></i> 3. الوزن الجاف والسوائل</h3>
+      <div class="media-container"><img src="weight.png" alt="الوزن الجاف وتوازن السوائل" onerror="this.style.display='none'"></div>
+      <p><strong>ما هو الوزن الجاف؟</strong><br>الوزن الجاف أو الوزن المستهدف هو تقدير سريري للوزن الذي لا تكون عنده علامات واضحة لزيادة السوائل أو نقصها. ليس معادلة ثابتة، وقد يتغير مع فقدان أو اكتساب الوزن الحقيقي، المرض الحاد، الشهية، الدخول للمستشفى، أو تغير وظيفة القلب وكمية البول. [R3,R4]</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>ما يلاحظه المريض</th><th>ماذا قد يعني؟</th><th>ماذا يفعل؟</th></tr>
+          <tr><td>زيادة وزن سريعة بين الجلسات + تورم/ضيق نفس</td><td>غالبًا تراكم سوائل، مع ضرورة استبعاد أسباب أخرى.</td><td>إبلاغ وحدة الغسيل وعدم محاولة "تعويض" المشكلة بتغيير العلاج بنفسه.</td></tr>
+          <tr><td>دوخة أو تقلصات قرب نهاية الجلسة بشكل متكرر</td><td>قد تكون إزالة السوائل أسرع/أكثر من قدرة الجسم على التعويض، أو أن الوزن المستهدف يحتاج مراجعة، أو توجد أسباب أخرى.</td><td>تسجيل وقت ظهور الأعراض وإبلاغ الفريق لمراجعة UF والوزن المستهدف والأدوية.</td></tr>
+          <tr><td>ضغط مرتفع مع زيادة الوزن وضيق النفس</td><td>قد ينسجم مع زيادة السوائل لكنه ليس تشخيصًا منفردًا.</td><td>التقييم السريري مهم، خاصة إذا ظهرت صعوبة تنفس.</td></tr>
+          <tr><td>انخفاض الوزن الحقيقي بسبب ضعف الشهية</td><td>قد يصبح الوزن المستهدف السابق أعلى من الوزن الحقيقي الجديد.</td><td>إبلاغ اختصاصي التغذية وفريق الغسيل بدل افتراض أن كل نقص وزن هو "إزالة سوائل".</td></tr>
+        </table>
+      </div>
+      <p><strong>كيف يقلل المريض العطش؟</strong></p>
+      <ul>
+        <li>تقليل الملح والأطعمة شديدة الملوحة لأن الصوديوم يزيد العطش واحتباس السوائل.</li>
+        <li>توزيع كمية السوائل المسموحة على اليوم بدل شرب كمية كبيرة دفعة واحدة.</li>
+        <li>استخدام أكواب صغيرة وقياس الكمية بدل التقدير العشوائي.</li>
+        <li>العناية بجفاف الفم بوسائل مناسبة يحددها الفريق، مع تجنب المنتجات الغنية بالصوديوم أو السكر إذا كانت غير مناسبة للحالة.</li>
+      </ul>
+      <p>عبارة "كل 1 كغم = تقريبًا 1 لتر" مفيدة لفهم زيادة وزن السوائل، لكنها لا تعني أن كل فرق وزن هو سوائل فقط، ولا تعني أن هذا هو هدف UF تلقائيًا. [R3,R4]</p>
+    </div>
+
+    <div id="sec4" class="section-card reveal">
+      <h3><i class="fas fa-utensils"></i> 4. الحمية الغذائية العملية</h3>
+      <div class="media-container"><img src="diet.png" alt="أمثلة من الطعام المحلي والحمية" onerror="this.style.display='none'"></div>
+      <p>الحمية في غسيل الكلى يجب أن تكون فردية. المريض الذي لديه بول متبقٍ أو بوتاسيوم طبيعي مستقر قد تختلف احتياجاته عن مريض عديم البول وذو ارتفاعات متكررة. كما تختلف القيود باختلاف تكرار الغسيل ومدة الجلسات. [R5,R16]</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>العنصر</th><th>لماذا نهتم به؟</th><th>كيف نشرحه للمريض عمليًا؟</th></tr>
+          <tr><td>الصوديوم</td><td>يزيد العطش واحتباس السوائل وقد يصعّب ضبط الضغط.</td><td>التركيز على تقليل الملح والمنتجات المصنعة والصلصات والمخللات، وقراءة الملصق الغذائي.</td></tr>
+          <tr><td>البوتاسيوم</td><td>ارتفاعه الشديد قد يؤثر في كهرباء القلب.</td><td>لا نمنع "كل ما فيه بوتاسيوم"؛ نربط النصيحة بالتحليل والحصة والطريقة الغذائية.</td></tr>
+          <tr><td>الفوسفور</td><td>قد يتراكم ويرتبط باضطرابات العظام والمعادن والحكة.</td><td>الانتباه خصوصًا للمضافات الفوسفاتية في الأغذية المصنعة؛ كلمة PHOS في المكونات علامة مهمة.</td></tr>
+          <tr><td>البروتين</td><td>مرضى الغسيل يحتاجون عادةً بروتينًا كافيًا للحفاظ على العضلات والتغذية.</td><td>الهدف يحدده اختصاصي التغذية حسب الحالة، وليس حمية منخفضة البروتين تلقائيًا.</td></tr>
+          <tr><td>السوائل</td><td>تؤثر في زيادة الوزن والضغط وتحمل UF.</td><td>تشمل الماء والقهوة والشاي والشوربة والثلج وما يصبح سائلاً في درجة الغرفة.</td></tr>
+        </table>
+      </div>
+      <p><strong>أمثلة من الطعام الأردني والعربي</strong></p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>الطعام</th><th>النقطة التي ننتبه لها</th><th>رسالة الموقع</th></tr>
+          <tr><td>المنسف/الجميد</td><td>الصوديوم والفوسفور وحجم الحصة.</td><td>ليس "ممنوعًا" تلقائيًا؛ المشكلة غالبًا في الكمية وتكرار الوجبة وتركيز الجميد.</td></tr>
+          <tr><td>المقلوبة</td><td>الحصة ومكونات الخضار والملح.</td><td>نعدّل الوصفة والحصة بدل إعطاء قائمة ممنوعات جامدة.</td></tr>
+          <tr><td>الحمص/الفول/العدس</td><td>قد تكون مصادر معتبرة للبوتاسيوم والفوسفور.</td><td>الحصة مهمة، ويجب ربطها بالتحاليل والتغذية الكلية.</td></tr>
+          <tr><td>التمر والموز والبرتقال</td><td>قد تكون غنية بالبوتاسيوم.</td><td>نشرح البدائل والحصص بدل الاكتفاء بعبارة "ممنوع".</td></tr>
+          <tr><td>الأجبان واللبن والجميد</td><td>قد تحمل صوديومًا وفوسفورًا مرتفعين حسب النوع.</td><td>قراءة الملصق وحجم الحصة أهم من اسم الغذاء وحده.</td></tr>
+          <tr><td>المشروبات الغازية الداكنة والأطعمة المصنعة</td><td>قد تحتوي إضافات فوسفاتية وصوديومًا.</td><td>تعليم المريض قراءة المكونات وخصوصًا PHOS.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="sec5" class="section-card reveal">
+      <h3><i class="fas fa-hand-holding-medical"></i> 5. الوصول الوعائي والعناية اليومية</h3>
+      <div class="media-container"><img src="avf-care.png" alt="العناية بالوصول الوعائي" onerror="this.style.display='none'"></div>
+      <p>الناسور (AVF) والوصلة الصناعية (AVG) والقسطرة المركزية (CVC) ليست متساوية في مخاطر العدوى والمشكلات. القسطرة ترتبط بخطر أعلى لعدوى مجرى الدم، لذلك يُفضّل تقليل الاعتماد عليها عندما يكون الوصول الدائم مناسبًا. [R6,R7]</p>
+      <p><strong>قاعدة Look – Listen – Feel للمريض</strong></p>
+      <ul>
+        <li>انظر: احمرار، تورم، جرح، إفرازات، تغير في الجلد أو توسع غير معتاد.</li>
+        <li>اشعر: هل الـthrill المعتاد موجود؟ وهل تغيرت قوته؟</li>
+        <li>استمع/اطلب التقييم: أي تغير واضح أو فقدان للـthrill يحتاج تواصلًا سريعًا مع وحدة الغسيل.</li>
+        <li>عدم السماح بقياس الضغط أو سحب الدم أو إعطاء الحقن في ذراع الناسور/الوصلة إلا إذا كان هناك قرار طبي واضح.</li>
+        <li>تجنب الضغط المستمر أو حمل أشياء ثقيلة مباشرة على الوصول.</li>
+        <li>الحفاظ على النظافة ومراقبة علامات العدوى يوميًا.</li>
+        <li>توقف أو تغير الـthrill، نزيف لا يتوقف، تورم سريع، ألم شديد، احمرار مع حرارة/قشعريرة، أو تغير لون/برودة اليد هي أسباب للتواصل العاجل مع الفريق. [R6,R19]</li>
+      </ul>
+    </div>
+
+    <div id="sec6" class="section-card reveal">
+      <h3><i class="fas fa-syringe"></i> 6. التهاب الكبد B والتطعيم</h3>
+      <p>مرضى الغسيل يحتاجون اهتمامًا خاصًا بالوقاية من التهاب الكبد B لأنهم يتعرضون لإجراءات مرتبطة بالدم بصورة متكررة، والاستجابة المناعية للقاح قد تكون أقل من الأشخاص الأصحاء. جدول اللقاح يعتمد على المنتج المستخدم. [R10,R11]</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>اللقاح لدى البالغ على الغسيل</th><th>الجدول المرجعي حسب CDC</th><th>ملاحظة</th></tr>
+          <tr><td>Engerix-B</td><td>0، 1، 2، 6 أشهر</td><td>تستخدم جرعة مخصصة/أعلى لمرضى الغسيل حسب المنتج.</td></tr>
+          <tr><td>Recombivax HB Dialysis Formulation</td><td>0، 1، 6 أشهر</td><td>صيغة الغسيل 40 mcg حسب CDC.</td></tr>
+        </table>
+      </div>
+      <p>بعد إكمال السلسلة، يُفحص anti-HBs عادة بعد 1–2 شهر لتقييم الاستجابة. لدى مرضى الغسيل المستجيبين يُقيّم anti-HBs سنويًا؛ إذا انخفض إلى أقل من 10 mIU/mL توصي CDC بجرعة داعمة، ولا يلزم عادة اختبار استجابة بعد هذه الجرعة الداعمة. [R11]<br>لا يُكتب جدول لقاح على الموقع على أنه بروتوكول وحيد دون ذكر اسم المنتج، لأن الجدول يختلف بين اللقاحات. كما يجب مطابقة الصفحة مع سياسة وزارة الصحة/المؤسسة المحلية.</p>
+    </div>
+
+    <div id="sec7" class="section-card reveal">
+      <h3><i class="fas fa-pills"></i> 7. الأدوية التي يكثر سؤال المرضى عنها</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>الفئة</th><th>لماذا تستخدم؟</th><th>نقطة تعليمية مهمة</th></tr>
+          <tr><td>رابطات الفوسفور</td><td>تقليل امتصاص الفوسفور من الطعام.</td><td>فعاليتها ترتبط بتناولها بالطريقة والتوقيت الموصوفين مع الوجبات؛ لا تُضاعف الجرعة ذاتيًا.</td></tr>
+          <tr><td>الحديد</td><td>علاج أو الوقاية من نقص الحديد ضمن خطة فقر الدم.</td><td>يُفسر مع Hb وFerritin وTSAT، وليس رقم ferritin وحده.</td></tr>
+          <tr><td>عوامل تحفيز تكوين الكريات الحمراء ESA</td><td>علاج بعض حالات فقر الدم المرتبط بـCKD.</td><td>الجرعة والهدف فرديان ويعتمدان على استجابة Hb والمخاطر السريرية. [R15]</td></tr>
+          <tr><td>أدوية الضغط</td><td>ضبط الضغط وحماية القلب/الأوعية حسب الحالة.</td><td>توقيت الجرعة حول جلسة الغسيل لا يُغيّر إلا بالتنسيق مع الفريق، خصوصًا عند هبوط الضغط المتكرر.</td></tr>
+          <tr><td>فيتامين D/علاجات CKD-MBD</td><td>تستخدم في سياق اضطراب الكالسيوم والفوسفور وPTH.</td><td>لا تُفهم من PTH وحده؛ تُقرأ النتائج كسلسلة واتجاه. [R16]</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="sec8" class="section-card reveal">
+      <h3><i class="fas fa-triangle-exclamation"></i> 8. الأعراض الشائعة وعلامات الخطر</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>العرض</th><th>أسباب محتملة أثناء/بعد الغسيل</th><th>متى يصبح عاجلًا؟</th></tr>
+          <tr><td>دوخة/هبوط ضغط</td><td>إزالة سوائل، أدوية، تناول وجبة، عدوى أو مشكلة قلبية وغيرها.</td><td>إغماء، ألم صدر، ضيق نفس، ارتباك أو استمرار الأعراض.</td></tr>
+          <tr><td>تقلصات عضلية</td><td>انكماش حجم البلازما، هبوط ضغط، اختلالات شوارد أو وزن مستهدف غير مناسب.</td><td>إذا كانت شديدة أو متكررة وتمنع إكمال الجلسة.</td></tr>
+          <tr><td>غثيان/قيء</td><td>هبوط ضغط هو سبب شائع، وقد توجد أسباب أخرى مرتبطة بالغسيل أو المريض.</td><td>مع ألم صدر، اضطراب وعي، حرارة شديدة أو علامات عصبية.</td></tr>
+          <tr><td>قشعريرة/حمى</td><td>عدوى أو تفاعل pyrogenic أو أسباب أخرى.</td><td>أي حمى/قشعريرة أثناء الغسيل تحتاج تقييمًا سريعًا.</td></tr>
+          <tr><td>ألم/تورم الوصول</td><td>infiltration، عدوى، نزف أو مشكلة تدفق.</td><td>تورم سريع، نزيف مستمر، فقدان thrill أو تغير دوران اليد.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="sec9" class="section-card reveal">
+      <h3><i class="fas fa-plane"></i> 9. الحياة اليومية والسفر والنشاط</h3>
+      <ul>
+        <li>السفر ممكن غالبًا لكن يحتاج ترتيب الجلسات مسبقًا وتبادل الوصفة والنتائج مع مركز الاستقبال.</li>
+        <li>العمل والدراسة يمكن الاستمرار بهما مع جدولة الجلسات ومناقشة التعب والأعراض مع الفريق.</li>
+        <li>النشاط البدني يُفصّل حسب الحالة القلبية والقدرة الوظيفية والوصول الوعائي؛ الهدف عادة المحافظة على الحركة لا الإفراط في الجهد.</li>
+        <li>الصيام أو تغييرات كبيرة في الطعام والسوائل يجب مناقشتها مع فريق الكلى لأن المخاطر تختلف حسب كمية البول، الضغط، السكري والأدوية.</li>
+        <li>تغير المزاج، القلق، اضطراب النوم والإرهاق تستحق السؤال عنها وعلاجها؛ جودة الحياة جزء من الرعاية وليست أمرًا ثانويًا.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= بوابة الممرضين ================= -->
+  <div id="nurse-section" class="content-section">
+    <button class="back-btn" onclick="showSelection()"><i class="fas fa-arrow-right"></i> العودة للاختيار</button>
+    
+    <div class="disclaimer reveal">
+      <i class="fas fa-triangle-exclamation"></i>
+      <div><strong>تنبيه:</strong> أي قرار علاجي، وصفة غسيل، تعديل للوزن المستهدف، إعدادات جهاز، دواء، أو إجراء غازي يجب أن يتم وفق وصفة الطبيب، تعليمات الجهاز، سياسة المؤسسة، وتدريب مهني معتمد. تم تجنب تحويل قسم الكانيوليشن والإجراءات الطارئة إلى دليل تنفيذ ذاتي تفصيلي.</div>
+    </div>
+
+    <div class="portal-title reveal">
+      <h2><i class="fas fa-user-nurse"></i> بوابة ممرضي غسيل الكلى</h2>
+    </div>
+    <p class="portal-subtitle reveal">صيغة كل موضوع: لماذا يحدث؟ ماذا ألاحظ؟ ماذا أراجع؟ ما التدبير التمريضي العام؟ ما علامة الخطر؟ وما الخطأ الشائع؟ البروتوكول المحلي وتعليمات الجهاز هما المرجع التنفيذي النهائي.</p>
+
+    <!-- الأقسام من 1 إلى 19 للتمريض بدلاً من 10 إلى 28 -->
+    <div id="n1" class="section-card reveal">
+      <h3><i class="fas fa-clipboard-check"></i> 1. التقييم قبل وأثناء وبعد الجلسة</h3>
+      <p><strong>قبل الجلسة</strong></p>
+      <ul>
+        <li>تأكيد هوية المريض ووصفة الغسيل المحدثة وأي تغييرات طبية منذ الجلسة السابقة.</li>
+        <li>وزن ما قبل الجلسة ومقارنته بالوزن بعد الجلسة السابقة والوزن المستهدف واتجاه الزيادات بين الجلسات.</li>
+        <li>العلامات الحيوية مع تفسيرها سريريًا، وليس مجرد تسجيل رقم.</li>
+        <li>تقييم السوائل: وذمة، ضيق نفس، orthopnea عند وجودها، تغير الضغط، والأعراض المرتبطة بنقص الحجم.</li>
+        <li>تقييم AVF/AVG/CVC قبل الاستخدام بحثًا عن علامات عدوى أو خلل أو نزيف/تورم.</li>
+        <li>مراجعة أعراض جديدة: ألم صدر، ضيق نفس، حمى، نزيف، سقوط، دخول مستشفى، دواء جديد أو تغير في كمية البول.</li>
+        <li>مراجعة التحاليل ذات الصلة والوصفة: Qb/Qd، مدة الجلسة، dialysate composition، UF، anticoagulation وأي أوامر خاصة.</li>
+      </ul>
+      <p><strong>أثناء الجلسة</strong></p>
+      <ul>
+        <li>مراقبة المريض والوصول الوعائي والدائرة، لا الشاشة فقط.</li>
+        <li>ربط تغير الضغط الشرياني/الوريدي أو TMP مع حالة الدائرة والوصول الوعائي والأعراض.</li>
+        <li>تتبع UF والأعراض والضغط، وملاحظة النمط المتكرر وليس الحدث المنفرد فقط.</li>
+        <li>عدم إعادة ضبط الإنذار مرارًا قبل تفسير السبب المتوقع والتأكد من سلامة المريض والدائرة.</li>
+      </ul>
+      <p><strong>بعد الجلسة</strong></p>
+      <ul>
+        <li>وزن ما بعد الجلسة ومقارنته بالهدف مع تفسير أي فرق أو أعراض.</li>
+        <li>تقييم العلامات الحيوية والاستقرار عند الوقوف حسب سياسة الوحدة وحالة المريض.</li>
+        <li>تقييم hemostasis والوصول الوعائي وعدم وجود نزف مستمر أو تورم جديد.</li>
+        <li>توثيق المضاعفات والتدخلات والاستجابة، وأي نقطة تحتاج تعديلًا في الجلسة القادمة أو مراجعة طبية.</li>
+      </ul>
+    </div>
+
+    <div id="n2" class="section-card reveal">
+      <h3><i class="fas fa-gears"></i> 2. مبادئ الغسيل ومؤشرات الجهاز</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>المفهوم</th><th>المعنى العملي للممرض</th></tr>
+          <tr><td>Diffusion</td><td>حركة المذابات عبر الغشاء بحسب فرق التركيز؛ تتأثر بكفاءة الغشاء، Qb، Qd والوقت.</td></tr>
+          <tr><td>Ultrafiltration</td><td>إزالة الماء عبر الغشاء؛ معدل الإزالة والوقت يحددان تحمل المريض للوصفة.</td></tr>
+          <tr><td>Convection</td><td>حركة المذابات مع حركة الماء عبر الغشاء، وتبرز أكثر في أنماط علاجية تعتمد convective clearance.</td></tr>
+          <tr><td>Qb</td><td>تدفق الدم الفعلي عبر الدائرة؛ انخفاضه قد يقلل الكفاءة وقد يشير إلى access/catheter problem أو قيود أخرى.</td></tr>
+          <tr><td>Qd</td><td>تدفق سائل الغسيل؛ جزء من وصفة الكفاءة.</td></tr>
+          <tr><td>TMP</td><td>فرق الضغط عبر الغشاء؛ اتجاهه قد يساعد على اكتشاف تغير مقاومة المرشح/الدائرة لكنه يُفسر حسب الجهاز والوصفة.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="n3" class="section-card reveal">
+      <h3><i class="fas fa-droplet-slash"></i> 3. الوزن الجاف والسوائل وUF</h3>
+      <p>أهم خطأ تعليمي هو اعتبار الوزن الجاف رقمًا ثابتًا أو اعتبار فرق الوزن وحده مساويًا تلقائيًا لهدف UF. الوزن المستهدف يُراجع بالعلامات السريرية واتجاه الوزن والأعراض، وUF prescription يجب أن يراعي الوصفة، السوائل المعطاة/المفقودة أثناء الجلسة وقدرة المريض على التحمل. [R3,R4]</p>
+      <p><strong>مؤشرات أن الوزن المستهدف قد يحتاج مراجعة</strong></p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>الملاحظة المتكررة</th><th>ما الذي نفكر فيه؟</th></tr>
+          <tr><td>هبوط ضغط/تقلصات قرب نهاية الجلسة</td><td>UF rate/volume، الوزن المستهدف، أدوية الضغط، الطعام أثناء الجلسة، عدوى/قلب/أسباب أخرى.</td></tr>
+          <tr><td>بقاء وذمة/ضيق نفس/ضغط مرتفع رغم الوصول للهدف</td><td>قد يكون الهدف أعلى من الوزن الحقيقي المناسب أو توجد أسباب قلبية/رئوية أخرى.</td></tr>
+          <tr><td>زيادة وزن حقيقية بسبب تحسن التغذية</td><td>قد يصبح target weight القديم منخفضًا نسبيًا.</td></tr>
+          <tr><td>فقدان وزن غير مقصود/سوء تغذية</td><td>قد يصبح target weight القديم مرتفعًا بالنسبة للوزن الحقيقي الجديد.</td></tr>
+        </table>
+      </div>
+      <p><strong>IDWG</strong><br>زيادة الوزن بين الجلسات (Interdialytic Weight Gain) تُستخدم لفهم كمية السوائل المكتسبة واتجاه السلوك الغذائي/السوائل. الأفضل عرضها كاتجاه عبر عدة جلسات وبالنسبة إلى وزن الجسم، بدل الحكم على جلسة واحدة. [R4,R5]<br>أي حاسبة على الموقع ينبغي أن تكون تعليمية فقط، وتعرض النتيجة على أنها "فرق وزن/مؤشر" لا كأمر مباشر لإعداد UF.</p>
+    </div>
+
+    <div id="n4" class="section-card reveal">
+      <h3><i class="fas fa-wave-square"></i> 4. تقييم AVF/AVG واكتشاف الخلل</h3>
+      <div class="media-container"><video src="flow.mp4" autoplay loop muted playsinline alt="تدفق الدم في الوصلة الوريدية الشريانية" style="display:none;"></video></div>
+      <p>KDOQI تعتبر الفحص السريري للوصول الوعائي قبل كل cannulation ممارسة معقولة، لأن التغيرات السريرية قد تكون أول دليل على stenosis أو thrombosis أو infection أو aneurysm/pseudoaneurysm. [R6]</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>الملاحظة</th><th>التفسير المحتمل</th><th>الخطوة التمريضية العامة</th></tr>
+          <tr><td>ضعف/تغير الـthrill أو bruit</td><td>تغير التدفق، stenosis أو thrombosis محتمل.</td><td>لا تُعامل كاختلاف بسيط؛ أعد التقييم وقارن بالخط الأساسي وأبلغ حسب مسار الوحدة.</td></tr>
+          <tr><td>نزيف مطوّل بعد نزع الإبرة بشكل متكرر</td><td>قد يرتبط بمضاد التخثر أو مشكلة outflow/stenosis أو منطقة cannulation.</td><td>راجع anticoagulation ونمط النزف وتاريخ الضغوط واطلب تقييم access عند تكراره.</td></tr>
+          <tr><td>ارتفاع venous pressure تدريجيًا عبر جلسات</td><td>قد يشير إلى outflow resistance إضافةً لأسباب الدائرة/الإبرة.</td><td>قارن الاتجاهات ونتائج الفحص بدل تفسير الجلسة منفردة.</td></tr>
+          <tr><td>صعوبة cannulation متكررة</td><td>تشريح صعب، stenosis، عمق/مسار access أو مهارة cannulator.</td><td>التصعيد إلى cannulator خبير/ultrasound وفق سياسة الوحدة بدل تكرار المحاولات.</td></tr>
+          <tr><td>تورم الذراع/أوردة جانبية ظاهرة</td><td>احتمال venous outflow obstruction.</td><td>تقييم سريري وإحالة حسب المسار المحلي.</td></tr>
+          <tr><td>جلد رقيق/لامع فوق aneurysm أو ألم/زيادة سريعة بالحجم</td><td>خطر نزف/rupture أعلى.</td><td>تجنب استخدام المنطقة المتضررة وطلب تقييم عاجل.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="n5" class="section-card reveal">
+      <h3><i class="fas fa-syringe"></i> 5. الكانيوليشن: البروتوكول الآمن ومبادئ التقنية</h3>
+      <div class="media-container"><img src="cannulation.png" alt="تقنية الكانيوليشن" onerror="this.style.display='none'"></div>
+      <p>الكانيوليشن مهارة سريرية غازية يجب أن يتعلمها الممرض بالتدريب العملي والإشراف وتقييم الكفاءة. KDOQI توصي بالـrope-ladder كالتقنية المفضلة للـAVF، وتوصي بحصر buttonhole في ظروف خاصة بسبب زيادة خطر العدوى، وتجنب buttonhole في PTFE grafts. كما توصي باستخدام cannulators مهرة في الكانيوليشن الأولي وبالتدريب المنظم للممرضين. [R6]</p>
+      <p><strong>بروتوكول قبل الكانيوليشن</strong></p>
+      <ul>
+        <li>تأكد من هوية المريض والوصول الصحيح والوصفة، وراجع أي مشكلات في الجلسة السابقة.</li>
+        <li>افحص الوصول والجلد المحيط: علامات عدوى، ورم دموي، aneurysm/pseudoaneurysm، تغير الـthrill/bruit، مناطق الألم أو الجلد المتضرر.</li>
+        <li>حدد خطة توزيع المواقع وفق rope-ladder وسياسة الوحدة؛ تجنب تكرار الوخز في نقطة واحدة لأن ذلك يساهم في أذية الجدار والـaneurysm.</li>
+        <li>نظافة اليدين، قفازات نظيفة، وتنظيف الجلد ثم تطبيق المطهر الموصى به وتركه يجف وفق تعليمات المنتج وسياسة المنشأة. بعد التطهير لا تلمس الموقع إلا بتقنية معقمة. [R8]</li>
+        <li>إذا كانت خصائص الوصول غير واضحة أو توجد صعوبة متوقعة، اطلب مساعدة cannulator أكثر خبرة أو ultrasound إذا كان متاحًا وبحسب السياسة.</li>
+      </ul>
+      <p><strong>أثناء وبعد الكانيوليشن</strong></p>
+      <ul>
+        <li>الهدف هو دخول آمن مع أقل trauma ممكن، تثبيت الإبرة والخطوط لمنع الشد أو dislodgement، وبقاء موضع الوصول ظاهرًا وقابلًا للمراقبة طوال الجلسة.</li>
+        <li>راقب الألم المفاجئ، التورم، الرطوبة/الحرارة قرب الموقع، تغير الضغط الشرياني أو الوريدي، أو انخفاض Qb الفعلي؛ فقد تشير إلى infiltration أو تغير وضع الإبرة.</li>
+        <li>عند تكرار المشاكل لا تُحوّل repositioning المتكرر إلى عادة؛ أعد تقييم access وخطة المواقع ومهارة cannulation.</li>
+        <li>في decannulation/hemostasis اتبع بروتوكول الوحدة، وقيّم زمن النزف ونمط النزف المتكرر لأنه قد يكون علامة على مشكلة access أو anticoagulation.</li>
+      </ul>
+      <p>تم استبعاد تفاصيل زاوية/عمق الإدخال، اختيار gauge، والمناورات الدقيقة لإعادة تموضع الإبرة من هذا الملف؛ هذه تفاصيل عملية يجب تعلمها في تدريب سريري مباشر معتمد وتعتمد على نوع الوصول وتشريحه وسياسة المؤسسة.</p>
+    </div>
+
+    <div id="n6" class="section-card reveal">
+      <h3><i class="fas fa-diagram-project"></i> 6. العناية بالقسطرة الوريدية المركزية CVC</h3>
+      <div class="media-container"><video src="cvc.mp4" autoplay loop muted playsinline alt="العناية بالقسطرة الوريدية المركزية" style="display:none;"></video></div>
+      <p>القسطرة تحمل خطرًا أعلى لعدوى مجرى الدم من AVF/AVG، لذلك aseptic technique وhub disinfection من أهم نقاط السلامة. [R7,R9]</p>
+      <p><strong>عند كل اتصال أو فصل</strong></p>
+      <ul>
+        <li>نظافة اليدين وارتداء القفازات بحسب البروتوكول.</li>
+        <li>الحفاظ على القسطرة مغلقة/clamped عندما يجب أن تكون مغلقة، وتقليل زمن بقاء الـhub مفتوحًا.</li>
+        <li>تطهير كل hub بمطهر مناسب مع friction وإزالة أي بقايا دم، واستخدام مادة منفصلة لكل lumen وترك المطهر يجف. [R9]</li>
+        <li>بعد التطهير يجب ألا يلامس الـhub سطحًا غير معقم.</li>
+        <li>فحص exit site والضماد ووجود احمرار، ألم، إفرازات، نزف أو cuff/external changes.</li>
+      </ul>
+      <p><strong>متى نشك في dysfunction؟</strong><br>صعوبة في سحب/إرجاع الدم، Qb غير محقق، ضغوط غير معتادة، alarms متكررة أو حاجة متكررة لتغيير الوضعية.<br>يجب التمييز بين مشكلة ميكانيكية بسيطة (kink/clamp/position) ومشكلة داخلية مثل thrombus/fibrin sheath أو malposition؛ التدبير يتبع بروتوكول الوحدة ولا يعتمد على تكرار عكس الخطوط كحل دائم.</p>
+    </div>
+
+    <div id="n7" class="section-card reveal">
+      <h3><i class="fas fa-bell"></i> 7. إنذارات جهاز الغسيل: السبب المتوقع والتفكير التمريضي</h3>
+      <div class="media-container"><video src="machine.mp4" autoplay loop muted playsinline alt="جهاز الغسيل وإنذاراته" style="display:none;"></video></div>
+      <p>المنطق الفيزيولوجي للدائرة متشابه بين أجهزة الغسيل، لكن أسماء الرسائل وحدودها ووظائف الحماية تختلف حسب الموديل وإصدار البرنامج. لذلك الجدول التالي يشرح الأسباب السريرية المتوقعة، بينما أي إجراء على الجهاز نفسه يجب أن يتبع تعليمات الشركة المصنّعة (IFU) وسياسة الوحدة. [R13]</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>الإنذار</th><th>ماذا يعني؟</th><th>الأسباب المرجحة</th><th>ماذا يراجع الممرض؟</th></tr>
+          <tr><td>Arterial pressure أكثر سلبية من المعتاد / Low arterial pressure</td><td>مقاومة قبل مضخة الدم أو ضعف سحب الدم من الوصول.</td><td>kink/clamp في arterial line، needle position، infiltration، انخفاض تدفق AVF/AVG، catheter dysfunction، Qb أعلى من قدرة access، حركة الذراع.</td><td>افحص المريض والوصول والخط من المريض للمضخة، قارن بالbaseline ولا تكتفِ بإعادة ضبط الحدود.</td></tr>
+          <tr><td>Arterial pressure أقل سلبية/أعلى من المتوقع</td><td>تغير في الضغط قبل المضخة قد يعكس تغير الاتصال أو flow/monitoring.</td><td>انفصال/تسرب محتمل حسب موضع sensor، تغير Qb، مشكلة pressure line/transducer، تغير وضع الإبرة/القسطرة.</td><td>تأكد من سلامة التوصيلات والدائرة والوصول وقراءة الضغط مقارنة بالخط الأساسي.</td></tr>
+          <tr><td>Venous pressure مرتفع</td><td>مقاومة بعد الـdialyzer في طريق عودة الدم للمريض.</td><td>kink/clamp في venous line، clot بالـvenous chamber/dialyzer، needle malposition أو infiltration، outflow stenosis، catheter return problem، Qb مرتفع بالنسبة للوصول.</td><td>افحص من الـdialyzer حتى المريض، access site والذراع، واتجاه الضغط عبر الجلسات.</td></tr>
+          <tr><td>Venous pressure منخفض</td><td>انخفاض مقاومة خط الرجوع أو فقدان continuity.</td><td>loose/disconnected connection، needle dislodgement، تسرب، انخفاض Qb أو مشكلة monitoring line.</td><td>افحص المريض وموقع الإبرة والدائرة فورًا؛ لا تعتمد على alarm وحده لاكتشاف needle dislodgement.</td></tr>
+          <tr><td>TMP مرتفع أو يتجه للارتفاع</td><td>زيادة فرق الضغط عبر الغشاء/مقاومة المرشح.</td><td>clotting/hemoconcentration، تغير UF، مشكلة dialysate flow/pressure أو خصائص dialyzer.</td><td>قارن مع venous/arterial pressures وحالة الدائرة وUF؛ اتبع IFU للجهاز.</td></tr>
+          <tr><td>Air detector alarm</td><td>وجود هواء أو foam في المسار الوريدي أو خلل متعلق بموضع/مستوى chamber/sensor.</td><td>loose connection، انخفاض مستوى venous chamber، خط دواء مفتوح، priming غير كافٍ، leak، catheter/line defect.</td><td>تعامل كإنذار أمان؛ افحص الدائرة كاملة ولا تتجاوز detector أو تعطل وظيفة الحماية.</td></tr>
+          <tr><td>Blood leak alarm</td><td>اشتباه دم في dialysate أو مشكلة بالـdetector.</td><td>dialyzer membrane leak/rupture، detector contamination/technical issue، عوامل قد تعطي إنذارًا كاذبًا حسب الجهاز.</td><td>أوقف التفسير التلقائي بأنه "sensor فقط"؛ قيّم dialysate والدائرة واتبع IFU والبروتوكول.</td></tr>
+          <tr><td>Conductivity alarm</td><td>تركيز dialysate خارج النطاق المبرمج/الآمن.</td><td>concentrate غير صحيح/فارغ، water or mixing problem، connector/supply issue، sensor problem.</td><td>تأكد أن الجهاز دخل الحماية/bypass حسب تصميمه، ولا تستمر بالعلاج حتى حل السبب وفق IFU.</td></tr>
+          <tr><td>Temperature alarm</td><td>حرارة dialysate خارج النطاق.</td><td>heater/sensor/mixing problem أو setting غير صحيح.</td><td>لا تتابع العلاج مع dialysate غير آمن؛ اتبع IFU واستدعِ الدعم التقني عند الحاجة.</td></tr>
+          <tr><td>UF alarm / UF goal-time mismatch</td><td>النظام لا يستطيع تحقيق معدل/حجم UF كما هو مبرمج أو توجد مشكلة balancing.</td><td>وقت متبقٍ غير كافٍ، تغيير UF، interruption، balance system issue.</td><td>تحقق من الوصفة والوقت والحالة السريرية، ولا ترفع UF تلقائيًا لتعويض التأخير دون تقييم.</td></tr>
+          <tr><td>Power/system alarm</td><td>انقطاع كهرباء أو system fault.</td><td>power supply، battery state، internal fault.</td><td>حافظ على سلامة المريض والدائرة واتبع خطة الطوارئ وتعليمات الجهاز.</td></tr>
+        </table>
+      </div>
+      <p>خطأ شائع: توسيع حدود alarm أو ضغط Reset مرات متكررة قبل معرفة السبب. تغيّر الضغط قد يكون أول علامة على مشكلة بالدائرة أو الوصول الوعائي.</p>
+    </div>
+
+    <div id="n8" class="section-card reveal">
+      <h3><i class="fas fa-heart-pulse"></i> 8. مضاعفات الغسيل: السبب والتعامل التمريضي</h3>
+      <p>المرجع العملي الأساسي لهذا القسم هو BC Renal: Nursing Management of Complications during Hemodialysis، إصدار مارس 2025. [R12] تم تلخيص التدبير على مستوى التقييم والاستجابة العامة، مع ترك الأدوية والجرعات والخطوات الإجرائية التفصيلية لبروتوكول المؤسسة.</p>
+
+      <div class="case-card">
+        <h4>8.1 انخفاض الضغط أثناء الغسيل (Intradialytic Hypotension)</h4>
+        <p><strong>الأسباب المحتملة:</strong> UF يتجاوز plasma refilling، زيادة كبيرة بين الجلسات، وزن مستهدف غير مناسب، نزف، sepsis، ضعف vasoconstriction، الطعام أثناء الجلسة، أدوية/أمراض قلبية أو autonomic dysfunction.<br>
+        <strong>العلامات التي نبحث عنها:</strong> هبوط ضغط مع دوخة/ضعف، غثيان أو قيء، yawning، تقلصات، شحوب وتعرق، tachycardia؛ وقد تتطور إلى ألم صدر أو فقد وعي.<br>
+        <strong>التعامل التمريضي العام:</strong> أعد تقييم ABC والحالة السريرية والضغط، وراجع UF الجاري والوزن المستهدف والأدوية والأسباب غير المتعلقة بالسوائل. طبّق بروتوكول الوحدة لخفض/إيقاف UF مؤقتًا والدعم المناسب، وصعّد عند استمرار الأعراض أو وجود ألم صدر/اضطراب وعي/عدم استقرار.<br>
+        <strong>خطأ شائع:</strong> علاج الرقم فقط دون البحث عن سبب متكرر، أو افتراض أن كل hypotension سببه "dry weight منخفض".</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.2 التقلصات العضلية</h4>
+        <p><strong>الأسباب المحتملة:</strong> انكماش حجم البلازما، UF كبير بالنسبة للوزن، hypotension، وزن مستهدف غير مناسب، اختلال الصوديوم أو شوارد أخرى، poor plasma refilling.<br>
+        <strong>العلامات التي نبحث عنها:</strong> ألم وتشنج عضلي غالبًا في الساقين وقد يترافق مع hypotension.<br>
+        <strong>التعامل التمريضي العام:</strong> قيّم الضغط وUF والأعراض، عالج أي hypotension حسب البروتوكول، خفف العامل المسبب ضمن الخطة الموصوفة، وسجّل التكرار لمراجعة target weight/UF/dialysate prescription.<br>
+        <strong>خطأ شائع:</strong> الاكتفاء بالتدليك في كل جلسة دون مراجعة سبب التكرار.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.3 الغثيان والقيء</h4>
+        <p><strong>الأسباب المحتملة:</strong> هبوط الضغط من الأسباب الشائعة؛ كذلك disequilibrium، تفاعل dialyzer، hemolysis، infection/pyrogenic reaction أو سبب غير متعلق بالغسيل.<br>
+        <strong>العلامات التي نبحث عنها:</strong> غثيان أو قيء مع/بدون تغير ضغط أو أعراض أخرى.<br>
+        <strong>التعامل التمريضي العام:</strong> ابدأ بقياس الضغط وتقييم الأعراض المصاحبة، حماية المريض من aspiration حسب حالته، وابحث عن علامات hemolysis/anaphylaxis/fever/neurologic change. التدبير الدوائي فقط إذا كان موصوفًا.<br>
+        <strong>خطأ شائع:</strong> إعطاء antiemetic قبل التحقق من وجود hypotension أو سبب خطير.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.4 صداع أو أعراض عصبية جديدة</h4>
+        <p><strong>الأسباب المحتملة:</strong> تغير ضغط، disequilibrium، شوارد، glucose، أسباب عصبية غير مرتبطة بالغسيل.<br>
+        <strong>العلامات التي نبحث عنها:</strong> صداع شديد جديد، ارتباك، تغير رؤية، ضعف بؤري، تشنج.<br>
+        <strong>التعامل التمريضي العام:</strong> قيّم العلامات الحيوية والحالة العصبية والغلوكوز حسب البروتوكول، وأبلغ الطبيب/فعّل مسار الطوارئ عند علامات عصبية بؤرية أو اضطراب وعي.<br>
+        <strong>خطأ شائع:</strong> نسب كل صداع إلى الغسيل دون تقييم عصبي.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.5 Dialysis Disequilibrium Syndrome</h4>
+        <p><strong>الأسباب المحتملة:</strong> تغير أسمولية سريع عند إزالة اليوريا بسرعة، خصوصًا عند بدء الغسيل أو ارتفاع اليوريا الشديد/العودة بعد انقطاع.<br>
+        <strong>العلامات التي نبحث عنها:</strong> غثيان، صداع، restlessness، blurred vision، confusion، twitching أو seizures في الحالات الشديدة.<br>
+        <strong>التعامل التمريضي العام:</strong> تعرّف على المريض عالي الخطورة، راقب الأعراض العصبية، وأبلغ الطبيب فورًا لتعديل/إيقاف العلاج حسب شدة الحالة والوصفة. الوقاية بتعديل الوصفة هي الأساس.<br>
+        <strong>خطأ شائع:</strong> عدم التمييز بين DDS وأسباب عصبية أخرى خطيرة.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.6 Hemolysis</h4>
+        <p><strong>الأسباب المحتملة:</strong> ضغوط عالية/انسداد بالدائرة، catheter/needle malposition، مشكلة ميكانيكية، أو مشكلة dialysate/temperature/contamination بحسب الحالة.<br>
+        <strong>العلامات التي نبحث عنها:</strong> دم داكن/شفاف بشكل غير طبيعي، ألم صدر/ظهر/بطن، dyspnea، hypotension، dysrhythmia أو علامات hyperkalemia.<br>
+        <strong>التعامل التمريضي العام:</strong> اعتبرها طارئة: أوقف العلاج وفق بروتوكول الطوارئ، لا تعِد الدم المشتبه بأنه hemolyzed، راقب ECG/vitals وأبلغ الطبيب فورًا، واعزل الجهاز/الدائرة للتحقيق إذا اشتبه سبب تقني أو dialysate.<br>
+        <strong>خطأ شائع:</strong> إعادة الدم قبل استبعاد hemolysis.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.7 Air in bloodline / Air embolism</h4>
+        <p><strong>الأسباب المحتملة:</strong> loose connections، improper priming، medication line مفتوح، cracked catheter/line، انخفاض مستوى chamber أو malfunction.<br>
+        <strong>العلامات التي نبحث عنها:</strong> هواء مرئي/foam أو air alarm؛ وإذا دخل الهواء للمريض قد تظهر chest pain، dyspnea، cough، cyanosis، neurologic change أو collapse.<br>
+        <strong>التعامل التمريضي العام:</strong> تعامل مع الهواء في الخط فورًا حسب IFU وبروتوكول الوحدة. إذا اشتبه air embolism فهذا emergency: أوقف العلاج، امنع مزيدًا من دخول الهواء، فعّل الاستجابة الطارئة وراقب ABC/SpO2 واتصل بالطبيب/فريق الإنعاش.<br>
+        <strong>خطأ شائع:</strong> تجاوز air detector أو إعادة الدم عند الاشتباه بدخول هواء للمريض.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.8 تفاعل حاد/Anaphylaxis أو dialyzer reaction</h4>
+        <p><strong>الأسباب المحتملة:</strong> دواء، iron، latex، dialyzer/membrane/sterilant أو محفز آخر.<br>
+        <strong>العلامات التي نبحث عنها:</strong> حكة/urticaria، facial swelling، throat tightness، wheeze، dyspnea، hypotension أو collapse؛ وقد تحدث anaphylaxis دون طفح.<br>
+        <strong>التعامل التمريضي العام:</strong> توقف عن العامل المشتبه به، قيّم airway/breathing/circulation وفعّل بروتوكول anaphylaxis والطوارئ فورًا. قرر إعادة/عدم إعادة الدم حسب سبب التفاعل وبروتوكول الوحدة والطبيب.<br>
+        <strong>خطأ شائع:</strong> انتظار ظهور طفح جلدي قبل اعتبار anaphylaxis.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.9 Pyrogenic reaction / Fever during dialysis</h4>
+        <p><strong>الأسباب المحتملة:</strong> endotoxin/contamination في water/dialysate/dialyzer/bloodlines أو دواء ملوث؛ أو bacteremia من access أو مصدر آخر.<br>
+        <strong>العلامات التي نبحث عنها:</strong> إحساس بالبرد ثم chills/fever غالبًا مبكرًا، وقد يترافق hypotension، nausea/vomiting.<br>
+        <strong>التعامل التمريضي العام:</strong> قيّم مصدر عدوى محتمل وvitals وaccess، أبلغ الطبيب، اتبع أوامر cultures والعلاج، وإذا اشتبه pyrogen/endotoxin اتبع بروتوكول إيقاف العلاج والتحقيق وأخذ عينات water/dialysate. راقب إن كان أكثر من مريض متأثرًا.<br>
+        <strong>خطأ شائع:</strong> افتراض أن كل قشعريرة مجرد "برد من الجهاز".</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.10 Clotted extracorporeal circuit</h4>
+        <p><strong>الأسباب المحتملة:</strong> anticoagulation غير كافٍ، low blood flow، frequent pump stops، kink/clamp، infiltration، hemoconcentration، Hct مرتفع.<br>
+        <strong>العلامات التي نبحث عنها:</strong> dark streaks/clots في chamber/dialyzer، rising pressures، loss of fibers/clearance أو alarms.<br>
+        <strong>التعامل التمريضي العام:</strong> ابحث عن السبب الميكانيكي أولًا، قيّم امتداد clotting واتبع بروتوكول الوحدة بشأن استمرار/تغيير الدائرة. إذا كانت الدائرة متخثرة بالكامل لا تُرجع الدم بالقوة.<br>
+        <strong>خطأ شائع:</strong> محاولة hand-crank/إرجاع دم من دائرة متخثرة بالكامل.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.11 Needle infiltration / Hematoma</h4>
+        <p><strong>الأسباب المحتملة:</strong> access جديد/هش، needle malposition، حركة الإبرة/المريض أو تثبيت غير كافٍ.<br>
+        <strong>العلامات التي نبحث عنها:</strong> ألم مفاجئ، swelling، warmth/moisture/pressure قرب الموقع، arterial/venous alarms.<br>
+        <strong>التعامل التمريضي العام:</strong> أوقف استخدام الإبرة المتأثرة واطلب المساعدة وفق بروتوكول الوحدة، قيّم التورم والدورة الدموية والنزف، وحدد خطة استمرار العلاج بواسطة ممرض كفؤ/فريق access.<br>
+        <strong>خطأ شائع:</strong> الاستمرار في repositioning المتكرر داخل access متورم.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.12 Needle dislodgement / Vascular access disconnection</h4>
+        <p><strong>الأسباب المحتملة:</strong> تثبيت ضعيف، شد الخطوط، حركة المريض، connections غير آمنة.<br>
+        <strong>العلامات التي نبحث عنها:</strong> نزف، تغير venous pressure، wetness حول الموقع؛ وقد لا يكشف الجهاز كل حالات dislodgement.<br>
+        <strong>التعامل التمريضي العام:</strong> مراقبة الوصول بصريًا طوال الجلسة، تثبيت الخطوط، والاستجابة الفورية للنزف/الانفصال وفق بروتوكول الطوارئ.<br>
+        <strong>خطأ شائع:</strong> تغطية موقع الإبر بحيث لا يمكن رؤيته أو الاعتماد على venous alarm وحده.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.13 نزف مطول بعد إزالة الإبرة</h4>
+        <p><strong>الأسباب المحتملة:</strong> anticoagulation، ضغط غير مناسب، cannulation-site damage، احتمال outflow stenosis عند التكرار.<br>
+        <strong>العلامات التي نبحث عنها:</strong> استمرار النزف أكثر من المعتاد أو زيادة زمن hemostasis مقارنة بخط الأساس.<br>
+        <strong>التعامل التمريضي العام:</strong> حقق hemostasis وفق السياسة، راجع anticoagulation واتجاه زمن النزف، واربط النزف المتكرر بعلامات access dysfunction وأبلغ الفريق.<br>
+        <strong>خطأ شائع:</strong> اعتبار النزف المطول المتكرر طبيعيًا لمريض الغسيل.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.14 Chest pain / Arrhythmia during dialysis</h4>
+        <p><strong>الأسباب المحتملة:</strong> ischemia، hypotension، electrolyte shifts، volume change، air embolism، hemolysis أو سبب قلبي مستقل.<br>
+        <strong>العلامات التي نبحث عنها:</strong> ألم/ضغط صدري، dyspnea، diaphoresis، palpitations، ECG changes أو عدم استقرار.<br>
+        <strong>التعامل التمريضي العام:</strong> تعامل كحالة قلبية محتملة: تقييم ABC/vitals، إيقاف/تعديل العلاج حسب البروتوكول، ECG/oxygen أو إجراءات أخرى حسب المسار الطبي، وتصعيد عاجل.<br>
+        <strong>خطأ شائع:</strong> نسب الألم إلى القلق أو UF دون استبعاد الأسباب الخطرة.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>8.15 Seizure</h4>
+        <p><strong>الأسباب المحتملة:</strong> DDS، severe electrolyte/glucose disturbance، hypertensive emergency، hypoxia أو سبب عصبي.<br>
+        <strong>العلامات التي نبحث عنها:</strong> حركة تشنجية، تغير وعي، post-ictal state.<br>
+        <strong>التعامل التمريضي العام:</strong> احمِ المريض من الإصابة، قيّم airway/breathing/circulation، اطلب المساعدة الطبية فورًا واتبع seizure/emergency protocol؛ ابحث عن السبب القابل للتصحيح.<br>
+        <strong>خطأ شائع:</strong> وضع أشياء داخل فم المريض أو تأخير طلب المساعدة.</p>
+      </div>
+    </div>
+
+    <div id="n9" class="section-card reveal">
+      <h3><i class="fas fa-shield-virus"></i> 9. مكافحة العدوى في وحدة الغسيل</h3>
+      <p>CDC توصي بحزمة تدخلات تشمل surveillance لعدوى مجرى الدم، تدقيق hand hygiene شهريًا، ملاحظة access/catheter care دوريًا، تدريب وتقييم competency كل 6–12 شهرًا وعند التوظيف، تثقيف المرضى، تقليل القساطر، واستخدام ممارسات مطهرة معيارية. [R7]<br><strong>نقاط لا ينبغي أن تكون مجرد شعارات</strong></p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>المجال</th><th>ما الذي يُدقق فعليًا؟</th></tr>
+          <tr><td>Hand hygiene</td><td>قبل/بعد contact، قبل aseptic task، بعد glove removal، وتوفر الأدوات.</td></tr>
+          <tr><td>AVF/AVG cannulation</td><td>تنظيف الجلد، hand hygiene، clean gloves، antiseptic مناسب ووقت جفاف، no-touch بعد التطهير، اتصال aseptic بالدائرة. [R8]</td></tr>
+          <tr><td>CVC hub</td><td>scrub with friction، إزالة بقايا الدم، pad منفصلة لكل lumen، dry time، عدم ملامسة nonsterile surface. [R9]</td></tr>
+          <tr><td>Station disinfection</td><td>تنظيف الأسطح/الجهاز بين المرضى بعد إزالة supplies الملوثة وبحسب disinfectant contact time.</td></tr>
+          <tr><td>Medication safety</td><td>تحضير الحقن في clean area بعيدًا عن مناطق التلوث والـblood exposure، وعدم مشاركة single-dose vials.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="n10" class="section-card reveal">
+      <h3><i class="fas fa-vial-circle-check"></i> 10. Hepatitis B: الفحوصات والتطعيم والمتابعة</h3>
+      <p><strong>التفسير العملي للـTriple Panel</strong></p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>HBsAg</th><th>Total anti-HBc</th><th>Anti-HBs</th><th>التفسير المحتمل</th><th>العمل العام</th></tr>
+          <tr><td>−</td><td>−</td><td>−</td><td>Susceptible إذا لم توجد سلسلة لقاح مكتملة/استجابة موثقة.</td><td>التطعيم حسب ACIP وسياسة الوحدة.</td></tr>
+          <tr><td>−</td><td>−</td><td>+</td><td>مناعة بعد التطعيم إذا كانت السلسلة موثقة وanti-HBs مناسب بعد الإكمال.</td><td>في مرضى الغسيل: متابعة anti-HBs سنويًا بعد إثبات الاستجابة.</td></tr>
+          <tr><td>−</td><td>+</td><td>+</td><td>عدوى سابقة متعافية ومناعة طبيعية.</td><td>توثيق الحالة والنظر في خطر reactivation عند ظروف خاصة.</td></tr>
+          <tr><td>+</td><td>+</td><td>−</td><td>عدوى HBV محتملة/مزمنة إذا IgM سلبي؛ acute إذا IgM إيجابي.</td><td>ربط المريض برعاية HBV وتطبيق سياسة وحدة الغسيل.</td></tr>
+          <tr><td>−</td><td>+</td><td>−</td><td>Isolated core antibody؛ له تفسيرات متعددة.</td><td>لا تُفسره كمناعة أو susceptibility مباشرة؛ يحتاج تقييم إضافي وفق CDC.</td></tr>
+        </table>
+      </div>
+      <p><strong>التطعيم والمتابعة في الغسيل</strong></p>
+      <ul>
+        <li>Engerix-B للبالغ على الغسيل: 4 جرعات عند 0، 1، 2، 6 أشهر حسب CDC.</li>
+        <li>Recombivax HB Dialysis Formulation: 3 جرعات عند 0، 1، 6 أشهر.</li>
+        <li>فحص anti-HBs بعد 1–2 شهر من إكمال السلسلة لتوثيق الاستجابة.</li>
+        <li>المستجيب على الغسيل: anti-HBs سنويًا، وإذا أصبح &lt;10 mIU/mL تُعطى booster dose حسب CDC، دون حاجة روتينية لاختبار استجابة بعد booster. [R10,R11]</li>
+        <li>المريض HBsAg-positive يُدار وفق سياسة العدوى المحلية/CDC بما في ذلك إجراءات الفصل/التخصيص المطلوبة في وحدات الغسيل.</li>
+      </ul>
+    </div>
+
+    <div id="n11" class="section-card reveal">
+      <h3><i class="fas fa-flask-vial"></i> 11. تفسير التحاليل</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>التحليل</th><th>الفكرة الأساسية</th><th>أسباب/عوامل محتملة</th><th>كيف يفكر الممرض؟</th></tr>
+          <tr><td>Potassium</td><td>لماذا يرتفع؟</td><td>missed/shortened dialysis، inadequate clearance، dietary load، acidosis، medications، tissue breakdown؛ وتذكر pseudohyperkalemia من عينة hemolyzed.</td><td>اربط بالـECG والأعراض وتوقيت العينة والوصفة والوصول الوعائي، وصعّد الارتفاع الشديد/المصحوب بتغيرات قلبية.</td></tr>
+          <tr><td>Sodium</td><td>يتأثر بالماء وتوازن الصوديوم والجلوكوز وعوامل أخرى.</td><td>لا تفسر hyponatremia/ارتفاع الصوديوم خارج سياق fluid status وserum glucose/dialysate prescription.</td><td>راجع الأعراض العصبية واتجاه النتيجة.</td></tr>
+          <tr><td>Calcium + Phosphate + PTH</td><td>تقييم CKD-MBD يجب أن يعتمد على القيم معًا واتجاهها وليس رقمًا منفردًا. [R16]</td><td>phosphate intake/additives، dialysis removal، binders، vitamin D/calcimimetic therapy، adherence.</td><td>راقب الاتجاه والأدوية/الحمية ولا "تعالج PTH" بمعزل عن Ca/P.</td></tr>
+          <tr><td>Hb</td><td>جزء من تقييم anemia في CKD. [R15]</td><td>نقص الحديد، inflammation، blood loss، inadequate dialysis، ESA response وغيرها.</td><td>اربط بالـiron indices والنزف والالتهاب والاتجاه.</td></tr>
+          <tr><td>Ferritin + TSAT</td><td>مؤشرات مختلفة لحالة الحديد، وferritin يتأثر بالالتهاب.</td><td>لا تستخدم ferritin وحده للحكم على توفر الحديد.</td><td>القرارات العلاجية تتبع KDIGO/بروتوكول المؤسسة.</td></tr>
+          <tr><td>Albumin</td><td>يرتبط بالتغذية والالتهاب والمرض، وليس اختبار تغذية منفردًا.</td><td>قد ينخفض مع inflammation أو poor intake أو protein losses.</td><td>انظر للوزن، الشهية، CRP/clinical context والتقييم الغذائي.</td></tr>
+          <tr><td>Bicarbonate</td><td>يعكس acid-base status ضمن السياق.</td><td>قد ينخفض مع metabolic acidosis أو inadequate buffering.</td><td>اربط بالdialysate bicarbonate والوصفة والأعراض.</td></tr>
+          <tr><td>BUN/Creatinine</td><td>تعكس تراكم فضلات لكن تتأثر بالتغذية والكتلة العضلية والوقت منذ آخر جلسة.</td><td>تستخدم BUN pre/post في adequacy calculations.</td><td>لا تستخدم creatinine وحده لقياس كفاءة جلسة الغسيل.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="n12" class="section-card reveal">
+      <h3><i class="fas fa-gauge-high"></i> 12. كفاءة الغسيل Kt/V وURR</h3>
+      <p>لدى كثير من مرضى الغسيل داخل المركز ثلاث مرات أسبوعيًا، يُستخدم delivered spKt/V لا يقل عادةً عن 1.2 وURR لا يقل عن 65% كمؤشرات شائعة، مع target prescribed spKt/V يقارب 1.4 في KDOQI 2015 لضمان الجرعة المقدمة. الأهداف قد تختلف حسب residual kidney function والوصفة. [R2,R14]</p>
+      <p><strong>إذا كان Kt/V منخفضًا: لا تبدأ بالرقم، ابدأ بالأسباب</strong></p>
+      <ul>
+        <li>هل أُكملت مدة الجلسة الموصوفة؟ هل توجد missed/shortened sessions؟</li>
+        <li>هل Qb الفعلي يحقق الوصفة أم توجد alarms/access dysfunction/catheter recirculation؟</li>
+        <li>هل dialyzer مناسب وهل clotting يقلل surface area الفعالة؟</li>
+        <li>هل أخذت عينات pre/post BUN بالطريقة والتوقيت الصحيحين؟</li>
+        <li>هل هناك recirculation في access أو needle placement issue؟</li>
+        <li>هل زيادة الوزن وUF الكبيرة تؤثر في تفسير URR؟ [R14]</li>
+      </ul>
+    </div>
+
+    <div id="n13" class="section-card reveal">
+      <h3><i class="fas fa-droplet"></i> 13. فقر الدم في CKD والغسيل</h3>
+      <p>KDIGO أصدرت تحديث 2026 لإرشادات فقر الدم في CKD، وتشمل مرضى الغسيل. دور الممرض هو مراقبة الاتجاهات، إعطاء العلاج الموصوف بأمان، اكتشاف النزف/عدم الاستجابة، وربط Hb بحالة الحديد والالتهاب والتغذية والغسيل. [R15]</p>
+      <ul>
+        <li>Hb منخفض لا يعني تلقائيًا "أعطِ ESA أكثر"؛ يجب التفكير في iron deficiency، inflammation/infection، blood loss، hemolysis، nutritional deficiencies أو أسباب أخرى.</li>
+        <li>Ferritin قد يكون مرتفعًا مع الالتهاب، لذلك يُقرأ مع TSAT والسياق السريري.</li>
+        <li>مراقبة الوصول الوعائي والنزف المتكرر والدائرة المتخثرة مهمة لأنها قد تزيد فقد الدم.</li>
+        <li>التوثيق الدقيق لجرعات iron/ESA والاستجابة يمنع التكرار أو الأخطاء.</li>
+      </ul>
+    </div>
+
+    <div id="n14" class="section-card reveal">
+      <h3><i class="fas fa-bone"></i> 14. اضطراب المعادن والعظام CKD-MBD</h3>
+      <p>في مرضى CKD G5D، تقييم phosphate/calcium/PTH يعتمد على الاتجاهات المتسلسلة والعلاقة بينها. KDIGO توصي بخفض الفوسفور المرتفع نحو الطبيعي، مراعاة مصدر الفوسفور، وتجنب الاستخدام الطويل لمركبات الألومنيوم. [R16]</p>
+      <ul>
+        <li>الارتفاع المستمر للفوسفور: راجع الحمية ومضافات phosphate، توقيت/التزام binders، adequacy والمدة/التكرار.</li>
+        <li>PTH غير الطبيعي يُفسر مع calcium/phosphate وvitamin D وعلاج calcimimetic/active vitamin D حسب الوصفة.</li>
+        <li>التثقيف الغذائي يجب أن يميز بين phosphorus additives شديدة الامتصاص وبين المصادر الطبيعية، وليس مجرد قائمة ممنوعات.</li>
+      </ul>
+    </div>
+
+    <div id="n15" class="section-card reveal">
+      <h3><i class="fas fa-tablets"></i> 15. الأدوية ومضاد التخثر</h3>
+      <p><strong>Anticoagulation</strong><br>الهدف منع clotting للدائرة مع تقليل خطر النزف. النظام والجرعة يحددهما الطبيب/البروتوكول؛ الممرض يراقب circuit clotting، bleeding، وقت hemostasis، الإجراءات الحديثة، thrombocytopenia أو تغير الأدوية المضادة للتخثر.</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>المشكلة</th><th>ما الذي تراجعه؟</th></tr>
+          <tr><td>Clotting متكرر للدائرة</td><td>Qb، pump interruptions، access flow، hemoconcentration/UF، وصفة anticoagulation، Hct، وجود kink/infiltration.</td></tr>
+          <tr><td>نزف مطول</td><td>وصفة anticoagulation، أدوية systemic anticoagulants/antiplatelets، cannulation sites، access stenosis signs، platelet issues.</td></tr>
+          <tr><td>Heparin-free dialysis</td><td>يحتاج بروتوكول خاص ومراقبة circuit أكثر كثافة؛ لا يُطبّق كحل عشوائي بسبب نزف دون أمر واضح.</td></tr>
+        </table>
+      </div>
+      <p><strong>أدوية شائعة يحتاج الممرض فهمها</strong></p>
+      <ul>
+        <li>IV iron وESA: ربطها بخطة anemia ومراقبة التفاعلات/الاستجابة.</li>
+        <li>Phosphate binders: فعاليتها مرتبطة بالطعام؛ التثقيف بالتوقيت جزء من العلاج.</li>
+        <li>Antihypertensives: راجع توقيتها عند IDH المتكرر بالتنسيق مع الطبيب، لا توقفها تلقائيًا.</li>
+        <li>Vitamin D/calcimimetic therapies: تربط بـCa/P/PTH trends.</li>
+        <li>الأدوية القابلة للإزالة بالغسيل: توقيت الجرعة يعتمد على dialyzability والوصفة ويُراجع مع الصيدلي/مرجع الدواء.</li>
+      </ul>
+    </div>
+
+    <div id="n16" class="section-card reveal">
+      <h3><i class="fas fa-apple-whole"></i> 16. التغذية للممرضين</h3>
+      <p>التثقيف الغذائي الجيد يبدأ من مشكلة محددة لا من قائمة "ممنوعات". مثال: مريض K مرتفع متكرر ➔ راجع adequacy، missed sessions، الأدوية، constipation/acid-base، ثم dietary sources والحصص. مريض phosphate مرتفع ➔ راجع additives، binders مع الوجبة، adequacy، والحصة. [R5,R16]</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>المشكلة</th><th>أسئلة تمريضية مفيدة</th></tr>
+          <tr><td>زيادة سوائل متكررة</td><td>كمية البول؟ الصوديوم؟ أين تأتي السوائل المخفية؟ هل توجد صعوبة في العطش؟ هل target weight محدث؟</td></tr>
+          <tr><td>Potassium مرتفع</td><td>جلسات كاملة؟ access functioning؟ hemolyzed sample؟ أدوية؟ إمساك/acid-base؟ مصادر غذائية كبيرة؟</td></tr>
+          <tr><td>Phosphate مرتفع</td><td>binders مع الوجبات؟ processed foods/PHOS additives؟ adherence؟ dialysis time/adequacy؟</td></tr>
+          <tr><td>Albumin منخفض/فقد وزن</td><td>شهية، nausea، depression، inflammation/infection، protein/energy intake، social barriers.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div id="n17" class="section-card reveal">
+      <h3><i class="fas fa-file-signature"></i> 17. التوثيق وسلامة المريض</h3>
+      <ul>
+        <li>وثّق baseline قبل الجلسة، وليس فقط أرقامًا؛ أي abnormal finding يحتاج خطة أو escalation.</li>
+        <li>وثق access assessment قبل الاستخدام، المشاكل أثناء cannulation، pressures غير المعتادة والتدخلات.</li>
+        <li>في complication: الوقت، الأعراض، vitals، machine parameters ذات الصلة، الإجراء، الشخص الذي تم إبلاغه، والاستجابة.</li>
+        <li>لا تعتمد على copy-forward أو عبارات عامة مثل "patient tolerated well" إذا حدث hypotension أو alarms متكررة.</li>
+        <li>تأكد من medication reconciliation وpatient identification وallergy status قبل إعطاء أي دواء.</li>
+        <li>أي تغيير في prescription يجب أن يكون موثق المصدر (physician/NP/order) وفق السياسة.</li>
+      </ul>
+    </div>
+
+    <div id="n18" class="section-card reveal">
+      <h3><i class="fas fa-list-check"></i> 18. قوائم تحقق قابلة للتحويل إلى صفحات تفاعلية</h3>
+      <div class="checklist-grid">
+        <div class="checklist-card">
+          <h4>قبل الجلسة</h4>
+          <ul>
+            <li>هوية المريض والوصفة الحالية</li>
+            <li>الوزن والـtarget weight واتجاه IDWG</li>
+            <li>vitals والأعراض</li>
+            <li>fluid assessment</li>
+            <li>access assessment</li>
+            <li>تحاليل/أدوية/أحداث جديدة</li>
+            <li>orders الخاصة بالجلسة</li>
+          </ul>
+        </div>
+        <div class="checklist-card">
+          <h4>AVF/AVG cannulation safety</h4>
+          <ul>
+            <li>فحص access والجلد</li>
+            <li>خطة site rotation</li>
+            <li>hand hygiene + gloves</li>
+            <li>skin cleansing/antisepsis + dry time</li>
+            <li>no-touch بعد التطهير</li>
+            <li>aseptic connection</li>
+            <li>secure needles/lines</li>
+            <li>visual monitoring طوال الجلسة</li>
+            <li>توثيق أي صعوبة أو infiltration</li>
+          </ul>
+        </div>
+        <div class="checklist-card">
+          <h4>CVC</h4>
+          <ul>
+            <li>exit-site assessment</li>
+            <li>hand hygiene/PPE</li>
+            <li>clamps and connections safe</li>
+            <li>hub disinfection with friction</li>
+            <li>separate antiseptic per lumen</li>
+            <li>dry time/no-touch</li>
+            <li>aseptic connection/disconnection</li>
+            <li>dressing clean/dry/intact</li>
+          </ul>
+        </div>
+        <div class="checklist-card">
+          <h4>بعد الجلسة</h4>
+          <ul>
+            <li>post-weight and vitals</li>
+            <li>symptoms resolved/stable</li>
+            <li>hemostasis/access status</li>
+            <li>medications completed</li>
+            <li>complications documented</li>
+            <li>follow-up/escalation arranged</li>
+            <li>patient teaching point if needed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="n19" class="section-card reveal">
+      <h3><i class="fas fa-stethoscope"></i> 19. حالات سريرية للتعليم</h3>
+      <div class="case-card">
+        <h4>حالة 1: Venous pressure يرتفع تدريجيًا</h4>
+        <p>السيناريو: مريض stable، Qb ثابت، والـvenous pressure أصبح أعلى خلال عدة جلسات.<br>نقطة التعلم: ما الذي يجب أن تقارنه؟ هل هناك kink/needle issue؟ هل توجد علامات outflow stenosis؟ هل زمن النزف بعد الجلسة أطول؟ الهدف هو ربط اتجاه الضغط بالـaccess وليس التعامل معه كإنذار جهاز فقط.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>حالة 2: Hypotension آخر ساعة</h4>
+        <p>السيناريو: المريض يصل بزيادة وزن كبيرة، يبدأ الضغط جيدًا ثم يصبح symptomatic في آخر ساعة.<br>نقطة التعلم: راجع UF rate/volume، plasma refill clues، target weight، food/medications، cardiac status. لا تجعل saline هو نهاية التفكير؛ ابحث عن سبب التكرار.</p>
+      </div>
+
+      <div class="case-card">
+        <h4>حالة 3: Kt/V منخفض</h4>
+        <p>السيناريو: الوقت الموصوف 4 ساعات لكن المريض ينهي مبكرًا، وهناك alarms arterial متكررة.<br>نقطة التعلم: قبل تغيير dialyzer، اسأل: هل الزمن مكتمل؟ هل Qb فعلي؟ هل access functioning؟ هل العينات صحيحة؟</p>
+      </div>
+
+      <div class="case-card">
+        <h4>حالة 4: anti-HBs = 7 mIU/mL لمريض غسيل كان مستجيبًا سابقًا</h4>
+        <p>السيناريو: المريض أكمل السلسلة وكان لديه استجابة موثقة.<br>نقطة التعلم: حسب CDC لمريض الغسيل المستجيب، يتم فحص anti-HBs سنويًا وإعطاء booster عندما ينخفض &lt;10 mIU/mL. [R11]</p>
+      </div>
+
+      <div class="case-card">
+        <h4>حالة 5: ألم وتورم مفاجئ حول إبرة AVF</h4>
+        <p>السيناريو: ظهر alarm وتورم بالموقع.<br>نقطة التعلم: فكر infiltration. أوقف استخدام الإبرة المتأثرة واتبع بروتوكول الوحدة، قيّم النزف/الدورة الدموية، واطلب مساعدة cannulator خبير بدل repositioning المتكرر.</p>
+      </div>
+    </div>
+
+    <!-- المراجع مشتركة/أو تابعة -->
+    <div id="refs" class="section-card reveal">
+      <h3><i class="fas fa-book"></i> المراجع</h3>
+      <ul style="font-size:0.95rem; color: var(--text-muted);">
+        <li>R1. KDIGO. 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease.</li>
+        <li>R2. National Kidney Foundation. Hemodialysis: How It Works, Types, and What to Expect. Updated 2026.</li>
+        <li>R3. National Kidney Foundation. What Is Dry Weight? Updated 2026.</li>
+        <li>R4. National Kidney Foundation. Ultrafiltration.</li>
+        <li>R5. KDOQI Clinical Practice Guideline for Nutrition in CKD: 2020 Update; National Kidney Foundation Nutrition in CKD resources.</li>
+        <li>R6. Lok CE, et al. KDOQI Clinical Practice Guideline for Vascular Access: 2019 Update. Am J Kidney Dis. 2020;75(4 Suppl 2):S1-S164.</li>
+        <li>R7. CDC. Best Practices for Bloodstream Infection Prevention in Dialysis Settings.</li>
+        <li>R8. CDC. Arteriovenous Fistula & Graft Cannulation/Decannulation Checklists and Audit Tools.</li>
+        <li>R9. CDC. Hemodialysis Central Venous Catheter Scrub-the-Hub Protocol.</li>
+        <li>R10. CDC. Adult Immunization Schedule Notes: Hepatitis B - Special Situations (Patients on Dialysis).</li>
+        <li>R11. Schillie S, et al. Prevention of Hepatitis B Virus Infection in the United States: Recommendations of ACIP. MMWR Recomm Rep. 2018;67(1):1-31; CDC hepatitis B testing guidance.</li>
+        <li>R12. BC Renal. Nursing Management of Complications during Hemodialysis. Updated March 2025.</li>
+        <li>R13. Fresenius Medical Care. 4008S Hemodialysis System - Instructions for Use (machine-specific alarm behavior and safety functions).</li>
+        <li>R14. KDOQI Clinical Practice Guideline for Hemodialysis Adequacy: 2015 Update; NKF adequacy resources.</li>
+        <li>R15. KDIGO. 2026 Clinical Practice Guideline for Anemia in Chronic Kidney Disease.</li>
+        <li>R16. KDIGO. 2017 Clinical Practice Guideline Update for CKD-Mineral and Bone Disorder (CKD-MBD).</li>
+        <li>R17. CDC. Clinical Testing and Diagnosis for Hepatitis B - Triple Panel and Interpretation.</li>
+        <li>R18. BC Renal. Vascular Access Resources: Cannulation, access monitoring, infection and disconnection prevention.</li>
+        <li>R19. CDC. Staff Keys to Success - Fistulas and Grafts: Look, Listen, Feel and Patient Education. 2026.</li>
+        <li>R20. National Kidney Foundation. Hemodialysis and Your Diet.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2026 بوابة مرضى الكلى وممرضي غسيل الكلى &mdash; المحتوى مُعدّ بإشراف <strong>فريق التمريض المتخصص</strong></p>
+</footer>
+
+<script>
+function showSection(role) {
+  document.getElementById('selection-screen').style.display = 'none';
+  document.getElementById('patient-section').style.display = 'none';
+  document.getElementById('nurse-section').style.display = 'none';
+  document.getElementById('patient-nav').classList.remove('active');
+  document.getElementById('nurse-nav').classList.remove('active');
+  document.body.classList.remove('mode-patient', 'mode-nurse');
+
+  const headerIcon = document.getElementById('header-icon');
+
+  if (role === 'patient') {
+    document.getElementById('patient-section').style.display = 'block';
+    document.getElementById('patient-nav').classList.add('active');
+    document.body.classList.add('mode-patient');
+    headerIcon.className = 'fas fa-user-injured';
+  } else if (role === 'nurse') {
+    document.getElementById('nurse-section').style.display = 'block';
+    document.getElementById('nurse-nav').classList.add('active');
+    document.body.classList.add('mode-nurse');
+    headerIcon.className = 'fas fa-user-nurse';
+  }
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  // تأخير بسيط للسماح للمتصفح برسم المحتوى قبل تشغيل الأنيميشن
+  setTimeout(reveal, 100);
+}
+
+function showSelection() {
+  document.getElementById('patient-section').style.display = 'none';
+  document.getElementById('nurse-section').style.display = 'none';
+  document.getElementById('patient-nav').classList.remove('active');
+  document.getElementById('nurse-nav').classList.remove('active');
+  document.body.classList.remove('mode-patient', 'mode-nurse');
+  document.getElementById('selection-screen').style.display = 'flex';
+  
+  document.getElementById('header-icon').className = 'fas fa-droplet';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('scroll', reveal);
+
+function reveal() {
+  var reveals = document.querySelectorAll('.reveal');
+  var windowHeight = window.innerHeight;
+  var elementVisible = 100;
+
+  for (var i = 0; i < reveals.length; i++) {
+    var windowScrollTop = window.scrollY;
+    // إذا كان العنصر معروضًا (Display block)
+    if (reveals[i].offsetParent !== null) {
+      var elementTop = reveals[i].getBoundingClientRect().top;
+      if (elementTop < windowHeight - elementVisible) {
+        reveals[i].classList.add('active');
+      }
+    }
+  }
+}
+reveal();
+
+// ضبط مساحة التمرير للأقسام بسبب الشريط الثابت (Sticky Nav)
+document.querySelectorAll('.section-card').forEach(function(el) {
+  el.style.scrollMarginTop = '90px';
+});
+</script>
 </body>
 </html>
